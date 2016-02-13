@@ -1,0 +1,9 @@
+@F01@
+	Husband: John Smith
+	Wife: Jane Smith/Doe
+@F02@
+	Husband: Johnny Smith
+	Wife: Maria Smith/Lopez
+@F03@
+	Husband: Johnny Smith
+	Wife: Betty Smith/Boop

@@ -23,6 +23,8 @@ int main(int argc, const char * argv[])
     
     // read lines from input file
     string line;
+    string levelZeroID;
+    string levelZeroTAG;
     while (getline(gedcomFile, line))
     {
         // Write line to output file
@@ -57,6 +59,7 @@ int main(int argc, const char * argv[])
         
         // Get tag
         string tag;
+        string ID;
         if(level == 0)  // Handle level 0 cases
         {
             // 0 <xref-id> <tag>
@@ -64,6 +67,7 @@ int main(int argc, const char * argv[])
                find(tokenizedLine.begin(), tokenizedLine.end(), "FAM") != tokenizedLine.end())
             {
                 tag = tokenizedLine[2];
+                ID = tokenizedLine[1];
             }
             else    // 0 <tag> <arguments that may be ignored>
             {
@@ -83,10 +87,108 @@ int main(int argc, const char * argv[])
         else
         {
             processedGEDCOM << "Invalid tag\n";
+            
+            // Dont process anything else, skip to next line
+            continue;
         }
-    }
+        
+        // Add line to individual
+        if(levelZeroTAG == "INDI")
+        {
+            // Get INDI mapped to levelZeroID
+            INDI i = lookupIndividual(levelZeroID);
+            if(level == 1 && tag == "NAME")
+            {
+                i.name = tokenizedLine[2] + " " + tokenizedLine[3];
+                individuals[levelZeroID]=i;
+            }
+        }
+        
+        if(levelZeroTAG == "FAM")
+        {
+            // Get FAM mapped to levelZeroID
+            FAM f = lookupFamily(levelZeroID);
+            if(level == 1 && tag == "HUSB")
+            {
+                // Add husband
+                f.husband = tokenizedLine[2];
+                families[levelZeroID] = f;
+            }
+            else if(level == 1 && tag == "WIFE")
+            {
+                // Add wife
+                f.wife = tokenizedLine[2];
+                families[levelZeroID] = f;
+            }
+        }
+        
+        if(tag == "INDI")
+        {
+            // Store empty INDI with unique ID
+            individuals[ID] = INDI();
+            
+            // Set levelZero variables to process other lines for INDI
+            levelZeroID = ID;
+            levelZeroTAG = tag;
+        }
+        
+        if(tag == "FAM")
+        {
+            // Store empty INDI with unique ID
+            families[ID] = FAM();
+            
+            // Set levelZero variables to process other lines for FAM
+            levelZeroID = ID;
+            levelZeroTAG = tag;
+        }
+    } // while (getline(gedcomFile, line))
+    
+    printIndividuals(argv[1]);
+    printFamilies(argv[1]);
     
     processedGEDCOM.close();
+}
+
+// Function to lookup individual based on unique ID
+// Returns INDI struct
+INDI lookupIndividual(string ID)
+{
+    return individuals.find(ID)->second;
+}
+
+// Function to lookup family based on unique ID
+// Returns FAM struct
+FAM lookupFamily(string ID)
+{
+    return families.find(ID)->second;
+}
+
+// Loops over map of individuals and prints to file
+// Maps store keys in alphabetical order
+void printIndividuals(string fileName)
+{
+    string outputFileName = "individuals" + string(fileName);
+    ofstream individualStream(outputFileName);
+    for(map<string, INDI>::iterator i = individuals.begin(); i != individuals.end(); ++i)
+    {
+        individualStream << i->first << " " << i->second.name << "\n";
+    }
+    individualStream.close();
+}
+
+// Loops over map of families and prints to file
+// Maps store keys in alphabetical order
+void printFamilies(string fileName)
+{
+    string outputFileName = "families" + string(fileName);
+    ofstream familyStream(outputFileName);
+    for(map<string, FAM>::iterator f = families.begin(); f != families.end(); ++f)
+    {
+        familyStream << f->first << "\n\t"
+        << "Husband: " << lookupIndividual(f->second.husband).name << "\n\t"
+        << "Wife: " << lookupIndividual(f->second.wife).name << "\n";
+    }
+    familyStream.close();
 }
 
 // Function to split string into a vector based on whitespace

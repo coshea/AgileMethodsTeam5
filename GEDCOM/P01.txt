@@ -1,7 +1,8 @@
 0 NOTE AgileMethodsTeam5
+0 NOTE https://github.com/coshea/AgileMethodsTeam5.git
 0 HEAD
 0 @I01@ INDI
-1 NAME John /Smith
+1 NAME John Smith
 1 SEX M
 1 BIRT
 2 DATE 1 JAN 1940
@@ -9,7 +10,7 @@
 2 DATE 1 JAN 2010
 1 FAMS @F01@
 0 @I02@ INDI
-1 NAME Jane /Smith/Doe
+1 NAME Jane Smith/Doe
 1 SEX F
 1 BIRT
 2 DATE 1 JAN 1940
@@ -17,7 +18,7 @@
 2 DATE 1 JAN 2011
 1 FAMS @F01@
 0 @I03@ INDI
-1 NAME Johnny /Smith
+1 NAME Johnny Smith
 1 SEX M
 1 BIRT
 2 DATE 1 JAN 1970
@@ -25,13 +26,13 @@
 1 FAMS @F03@
 1 FAMC @F01@
 0 @I04@ INDI
-1 NAME Janet /Smith
+1 NAME Janet Smith
 1 SEX F
 1 BIRT
 2 DATE 1 JAN 1975
 1 FAMC @F01@
 0 @I05@ INDI
-1 NAME Betty /Smith/Boop
+1 NAME Betty Smith/Boop
 1 SEX F
 1 BIRT
 2 DATE 1 JAN 1970
@@ -39,31 +40,31 @@
 2 DATE 1 JAN 1999
 1 FAMS @F03@
 0 @I06@ INDI
-1 NAME Maria /Smith/Lopez
+1 NAME Maria Smith/Lopez
 1 SEX F
 1 BIRT
 2 DATE 1 JAN 1970
 1 FAMS @F02@
 0 @I07@ INDI
-1 NAME John /Smith
+1 NAME John Smith
 1 SEX M
 1 BIRT
 2 DATE 1 JAN 1995
 1 FAMC @F03@
 0 @I08@ INDI
-1 NAME Becky /Smith
+1 NAME Becky Smith
 1 SEX F
 1 BIRT
 2 DATE 1 JAN 1997
 1 FAMC @F03@
 0 @I09@ INDI
-1 NAME Mary /Smith
+1 NAME Mary Smith
 1 SEX F
 1 BIRT
 2 DATE 1 JAN 2001
 1 FAMC @F02@
 0 @I10@ INDI
-1 NAME Mark /Smith
+1 NAME Mark Smith
 1 SEX M
 1 BIRT
 2 DATE 1 JAN 2005
@@ -82,11 +83,11 @@
 2 DATE 1 JAN 2000
 1 CHIL @I09@
 1 CHIL @I10@
-0 @F03@ FAMily
+0 @F03@ FAM
 1 HUSB @I03@
 1 WIFE @I05@
 1 MARR
 2 DATE 1 JAN 1990
 1 CHIL @I07@
-1 ERROR @I08@
-0 TRLr
+1 CHIL @I08@
+0 TRLR

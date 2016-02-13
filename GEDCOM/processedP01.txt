@@ -1,4 +1,4 @@
-0 NOTE Abel Rendon
+0 NOTE AgileMethodsTeam5
 0
 NOTE
 0 HEAD
@@ -7,7 +7,7 @@ HEAD
 0 @I01@ INDI
 0
 INDI
-1 NAME John /Smith
+1 NAME John Smith
 1
 NAME
 1 SEX M
@@ -31,7 +31,7 @@ FAMS
 0 @I02@ INDI
 0
 INDI
-1 NAME Jane /Smith/Doe
+1 NAME Jane Smith/Doe
 1
 NAME
 1 SEX F
@@ -55,7 +55,7 @@ FAMS
 0 @I03@ INDI
 0
 INDI
-1 NAME Johnny /Smith
+1 NAME Johnny Smith
 1
 NAME
 1 SEX M
@@ -79,7 +79,7 @@ FAMC
 0 @I04@ INDI
 0
 INDI
-1 NAME Janet /Smith
+1 NAME Janet Smith
 1
 NAME
 1 SEX F
@@ -97,7 +97,7 @@ FAMC
 0 @I05@ INDI
 0
 INDI
-1 NAME Betty /Smith/Boop
+1 NAME Betty Smith/Boop
 1
 NAME
 1 SEX F
@@ -121,7 +121,7 @@ FAMS
 0 @I06@ INDI
 0
 INDI
-1 NAME Maria /Smith/Lopez
+1 NAME Maria Smith/Lopez
 1
 NAME
 1 SEX F
@@ -139,7 +139,7 @@ FAMS
 0 @I07@ INDI
 0
 INDI
-1 NAME John /Smith
+1 NAME John Smith
 1
 NAME
 1 SEX M
@@ -157,7 +157,7 @@ FAMC
 0 @I08@ INDI
 0
 INDI
-1 NAME Becky /Smith
+1 NAME Becky Smith
 1
 NAME
 1 SEX F
@@ -175,7 +175,7 @@ FAMC
 0 @I09@ INDI
 0
 INDI
-1 NAME Mary /Smith
+1 NAME Mary Smith
 1
 NAME
 1 SEX F
@@ -193,7 +193,7 @@ FAMC
 0 @I10@ INDI
 0
 INDI
-1 NAME Mark /Smith
+1 NAME Mark Smith
 1
 NAME
 1 SEX M
@@ -250,9 +250,9 @@ CHIL
 1 CHIL @I10@
 1
 CHIL
-0 @F03@ FAMily
+0 @F03@ FAM
 0
-Invalid tag
+FAM
 1 HUSB @I03@
 1
 HUSB
@@ -268,9 +268,9 @@ DATE
 1 CHIL @I07@
 1
 CHIL
-1 ERROR @I08@
+1 CHIL @I08@
 1
-Invalid tag
-0 TRLr
+CHIL
+0 TRLR
 0
-Invalid tag
+TRLR
