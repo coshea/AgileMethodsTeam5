@@ -12,53 +12,7 @@
 
 #include <vector>
 #include <map>
+#include "Date.h"
+#include "GEDCOMManager.h"
 
 using namespace std;
-
-struct DATE
-{
-    int day;
-    int month;
-    int year;
-};
-
-struct INDI
-{
-    string name;
-    string sex;
-    DATE birth;
-    DATE death;
-    string famChild;
-    string famSpouse;
-};
-
-struct FAM
-{
-    DATE married;
-    DATE divorced;
-    string husband;
-    string wife;
-    vector<string> children;
-};
-
-vector<string> validTags = {"INDI", "NAME",
-                            "SEX", "BIRT",
-                            "DEAT", "FAMC",
-                            "FAMS", "FAM",
-                            "MARR", "HUSB",
-                            "WIFE", "CHIL",
-                            "DIV", "DATE",
-                            "HEAD", "TRLR",
-                            "NOTE"};
-
-map<string, INDI> individuals;
-map<string, FAM> families;
-
-INDI lookupIndividual(string ID);
-
-FAM lookupFamily(string ID);
-
-void printIndividuals(string fileName);
-void printFamilies(string fileName);
-
-void tokenize(string input, vector<string>& output);
