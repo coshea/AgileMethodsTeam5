@@ -8,7 +8,7 @@
 
 #include "GEDCOMManager.h"
 #include <fstream>
-
+#include "Errors.h"
 
 GEDCOMManager* GEDCOMManager::m_pInstance = NULL;
 
@@ -93,4 +93,22 @@ void GEDCOMManager::printFamilies(string fileName)
         << "Wife: " << lookupIndividual(f->second.getWife()).getName() << "\n";
     }
     familyStream.close();
+}
+
+
+void GEDCOMManager::errorCheck(string fileName)
+{
+	string outputFileName = "errors" + string(fileName);
+	ofstream errorStream(outputFileName);
+	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
+	{
+		if (i->second.getFAMS() != "")
+		{
+			// US02
+			BirthBeforeMarriage(errorStream, i->first, i->second, lookupFamily(i->second.getFAMS()));
+		}
+		// US03
+		BirthBeforeDeath(errorStream, i->first, i->second);
+	}
+	errorStream.close();
 }

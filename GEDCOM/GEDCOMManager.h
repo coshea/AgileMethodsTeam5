@@ -35,11 +35,13 @@ public:
     
     Family lookupFamily(string id);
     
-    void addHusbandToFamily(string husbID, string famID);
+	void addHusbandToFamily(string husbID, string famID);
     
-    void addWifeToFamily(string wifeID, string famID);
+	void addWifeToFamily(string wifeID, string famID);
     
     void printFamilies(string fileName);
+
+	void errorCheck(string fileName);
     
 private:
     

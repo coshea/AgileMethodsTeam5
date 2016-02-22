@@ -39,6 +39,8 @@ public:
     string toString();
     
     string monthToString(int m);
+
+	int stringToMonth(string m);
     
 private:
     int month;

@@ -92,3 +92,34 @@ string Date::monthToString(int m)
     }
     return ret;
 };
+
+int Date::stringToMonth(string m)
+{
+	int ret;
+	if (m == "JAN")
+		ret = 1;
+	if (m == "FEB")
+		ret = 2;
+	if (m == "MAR")
+		ret = 3;
+	if (m == "APR")
+		ret = 4;
+	if (m == "MAY")
+		ret = 5;
+	if (m == "JUN")
+		ret = 6;
+	if (m == "JUL")
+		ret = 7;
+	if (m == "AUG")
+		ret = 8;
+	if (m == "SEP")
+		ret = 9;
+	if (m == "OCT")
+		ret = 10;
+	if (m == "NOV")
+		ret = 11;
+	if (m == "DEC")
+		ret = 12;
+
+	return ret;
+};

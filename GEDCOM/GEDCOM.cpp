@@ -14,24 +14,35 @@
 #include "Individual.h"
 #include "Family.h"
 #include "GEDCOMManager.h"
+//define consoleApp 1
 
 // Main function
 int main(int argc, const char * argv[])
 {
-    
     GEDCOMManager *manager = GEDCOMManager::Instance();
     
     // Input file
-    ifstream gedcomFile(argv[1]);
-    
+	string inputFileName;
+#ifdef consoleApp
+	cout << "Please enter name of GEDCOM file: ";
+	cin >> inputFileName;
+	cout << endl;
+#else
+	inputFileName = argv[1];
+#endif
+    // Input file
+    ifstream gedcomFile(inputFileName);
+	
     // Output file
-    string outputFileName = "processed" + string(argv[1]);
+    string outputFileName = "processed" + string(inputFileName);
     ofstream processedGEDCOM(outputFileName);
     
     // read lines from input file
     string line;
     string levelZeroID;
     string levelZeroTAG;
+	string levelOneTAG = "";
+
     while (getline(gedcomFile, line))
     {
         // Write line to output file
@@ -89,6 +100,46 @@ int main(int argc, const char * argv[])
                 i.setName(name);
                 manager->addIndividual(levelZeroID, i);
             }
+			else if (level == 1 && tag == "SEX")
+			{
+				i.setSex(tokenizedLine[2]);
+				manager->addIndividual(levelZeroID, i);
+			}
+			else if (level == 1 && tag == "BIRT")
+			{
+				levelOneTAG = "BIRT";
+			}
+			else if (level == 1 && tag == "DEAT")
+			{
+				levelOneTAG = "DEAT";
+			}
+			else if (level == 1 && tag == "FAMS")
+			{
+				i.setFAMS(tokenizedLine[2]);
+				manager->addIndividual(levelZeroID, i);
+			}
+			else if (level == 1 && tag == "FAMC")
+			{
+				i.setFAMC(tokenizedLine[2]);
+				manager->addIndividual(levelZeroID, i);
+			}
+			else if (level == 2 && tokenizedLine[1] == "DATE")
+			{
+				Date d;
+				d.setDay(stoi(tokenizedLine[2]));
+				d.setMonth(d.stringToMonth(tokenizedLine[3]));
+				d.setYear(stoi(tokenizedLine[4]));
+				if (levelOneTAG == "BIRT")
+				{
+					i.setBirth(d);
+					manager->addIndividual(levelZeroID, i);
+				}
+				else if (levelOneTAG == "DEAT")
+				{ 
+					i.setDeath(d);
+					manager->addIndividual(levelZeroID, i);
+				}
+			}
         }
         
         if(levelZeroTAG == "FAM")
@@ -105,6 +156,22 @@ int main(int argc, const char * argv[])
                 // Add wife
                 manager->addWifeToFamily(tokenizedLine[2], levelZeroID);
             }
+			else if (level == 1 && tag == "MARR")
+			{
+				levelOneTAG = "MARR";
+			}
+			else if (level == 2 && tokenizedLine[1] == "DATE")
+			{
+				Date d;
+				d.setDay(stoi(tokenizedLine[2]));
+				d.setMonth(d.stringToMonth(tokenizedLine[3]));
+				d.setYear(stoi(tokenizedLine[4]));
+				if (levelOneTAG == "MARR")
+				{
+					f.setMarried(d);
+					manager->addFamily(levelZeroID, f);
+				}
+			}
         }
         
         if(tag == "INDI")
@@ -115,6 +182,7 @@ int main(int argc, const char * argv[])
             // Set levelZero variables to process other lines for INDI
             levelZeroID = ID;
             levelZeroTAG = tag;
+			levelOneTAG = "";
         }
         
         if(tag == "FAM")
@@ -125,11 +193,13 @@ int main(int argc, const char * argv[])
             // Set levelZero variables to process other lines for FAM
             levelZeroID = ID;
             levelZeroTAG = tag;
+			levelOneTAG = "";
         }
     } // while (getline(gedcomFile, line))
     
-    manager->printIndividuals(argv[1]);
-    manager->printFamilies(argv[1]);
+    manager->printIndividuals(inputFileName);
+    manager->printFamilies(inputFileName);
+	manager->errorCheck(inputFileName);
     
     processedGEDCOM.close();
 }

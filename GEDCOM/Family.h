@@ -20,13 +20,13 @@ class Family
 public:
     Family();
     
-    void setMarried(Date * m);
+    void setMarried(Date m);
     
-    Date * getMarried();
+    Date getMarried();
     
-    void setDivorced(Date * d);
+    void setDivorced(Date d);
     
-    Date * getDivorced();
+    Date getDivorced();
     
     void setHusband(string h);
     
@@ -41,8 +41,8 @@ public:
     vector<string> getChildren();
     
 private:
-    Date *married;
-    Date *divorced;
+	Date married = { 0, 0, 0 };
+	Date divorced = { 0, 0, 0 };
     string husband;
     string wife;
     vector<string> children;

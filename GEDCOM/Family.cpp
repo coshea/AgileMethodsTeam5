@@ -15,22 +15,22 @@ Family::Family()
     
 }
 
-void Family::setMarried(Date * m)
+void Family::setMarried(Date m)
 {
     married = m;
 }
 
-Date * Family::getMarried()
+Date Family::getMarried()
 {
     return married;
 }
 
-void Family::setDivorced(Date * d)
+void Family::setDivorced(Date d)
 {
     divorced = d;
 }
 
-Date * Family::getDivorced()
+Date Family::getDivorced()
 {
     return divorced;
 }

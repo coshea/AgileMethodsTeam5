@@ -27,13 +27,13 @@ public:
     
     string getSex();
     
-    void setBirth(Date *b);
+    void setBirth(Date b);
     
-    Date * getBirth();
+    Date getBirth();
     
-    void setDeath(Date *d);
+    void setDeath(Date d);
     
-    Date * getDeath();
+    Date getDeath();
     
     void setFAMC(string famc);
     
@@ -46,8 +46,8 @@ public:
 private:
     string name;
     string sex;
-    Date *birth;
-    Date *death;
+    Date   birth;
+    Date   death;
     string famChild;
     string famSpouse;
 };

@@ -12,8 +12,8 @@ Individual::Individual()
 {
     name = "";
     sex = "";
-    birth = NULL;
-    death = NULL;
+	birth = { 0, 0, 0 };
+	death = { 0, 0, 0 };
     famChild = "";
     famSpouse = "";
 }
@@ -38,22 +38,22 @@ string Individual::getSex()
     return sex;
 }
 
-void Individual::setBirth(Date *b)
+void Individual::setBirth(Date b)
 {
     birth = b;
 }
 
-Date * Individual::getBirth()
+Date Individual::getBirth()
 {
     return birth;
 }
 
-void Individual::setDeath(Date *d)
+void Individual::setDeath(Date d)
 {
     death = d;
 }
 
-Date * Individual::getDeath()
+Date Individual::getDeath()
 {
     return death;
 }
