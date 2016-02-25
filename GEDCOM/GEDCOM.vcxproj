@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Date.cpp" />
+    <ClCompile Include="Errors.cpp" />
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="GEDCOM.cpp" />
     <ClCompile Include="GEDCOMManager.cpp" />
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h" />
+    <ClInclude Include="Errors.h" />
     <ClInclude Include="Family.h" />
     <ClInclude Include="GEDCOM.h" />
     <ClInclude Include="GEDCOMManager.h" />
