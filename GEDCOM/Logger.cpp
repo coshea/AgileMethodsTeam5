@@ -1,10 +1,11 @@
 //
-//  Logger.cpp
+//  Logger.h
 //  GEDCOM
 //
 //  Created by William MacDowell on 2/22/16.
 //  Copyright © 2016 William MacDowell. All rights reserved.
 //
+//  See Logger.h for a description of this class.
 
 #include "Logger.h"
 
@@ -21,27 +22,42 @@ Logger::~Logger()
 	m_logFile.close();
 }
 
-void Logger::log(LogLevel level, string message)
+TempLogStream Logger::operator()()
 {
-	string levelStr = "";
+	return TempLogStream(*this, LogLevel::INFO, 0);
+}
 
-	switch (level)
+TempLogStream Logger::operator()(LogLevel logLevel, int lineNum)
+{
+	return TempLogStream(*this, logLevel, lineNum);
+}
+
+void Logger::log(LogLevel logLevel, int lineNum, string message)
+{
+	string loglevelstr = "";
+
+	switch (logLevel)
 	{
-	case INFO:
-		levelStr = "INFO";
+	case LogLevel::INFO:
+		loglevelstr = "INFO";
 		break;
-	case WARNING:
-		levelStr = "WARNING";
+	case LogLevel::WARNING:
+		loglevelstr = "WARNING";
 		break;
-	case ERROR:
-		levelStr = "ERROR";
+	case LogLevel::ERROR:
+		loglevelstr = "ERROR";
 		break;
-	default:
-		levelStr = "UNKNOWN";
+	case LogLevel::DEBUG:
+		loglevelstr = "DEBUG";
+		break;
+	default: // should not occur
+		loglevelstr = "UNKNOWN";
 		break;
 	}
 
 	m_mutex.lock();
-	m_logFile << levelStr << "\t" << message << std::endl;
+	m_logFile << "Line " << lineNum << 
+			"\t"<< loglevelstr << ")\t" << 
+			message << endl;
 	m_mutex.unlock();
 }
