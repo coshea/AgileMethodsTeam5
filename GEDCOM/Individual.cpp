@@ -10,70 +10,81 @@
 
 Individual::Individual()
 {
-    name = "";
-    sex = "";
-	birth = { 0, 0, 0 };
-	death = { 0, 0, 0 };
-    famChild = "";
-    famSpouse = "";
+    m_name = "";
+    m_sex = "";
+	m_birth = { 0, 0, 0 };
+	m_death = { 0, 0, 0 };
+    m_famChild = "";
+    m_famSpouse = "";
+	m_lineNumber = -1;
 }
 
 void Individual::setName(string n)
 {
-    name = n;
+    m_name = n;
 }
 
 string Individual::getName()
 {
-    return name;
+    return m_name;
 }
 
 void Individual::setSex(string s)
 {
-    sex = s;
+    m_sex = s;
 }
 
 string Individual::getSex()
 {
-    return sex;
+    return m_sex;
 }
 
 void Individual::setBirth(Date b)
 {
-    birth = b;
+    m_birth = b;
 }
 
 Date Individual::getBirth()
 {
-    return birth;
+    return m_birth;
 }
 
 void Individual::setDeath(Date d)
 {
-    death = d;
+    m_death = d;
 }
 
 Date Individual::getDeath()
 {
-    return death;
+    return m_death;
 }
 
 void Individual::setFAMC(string famc)
 {
-    famChild = famc;
+    m_famChild = famc;
 }
 
 string Individual::getFAMC()
 {
-    return famChild;
+    return m_famChild;
 }
 
 void Individual::setFAMS(string fams)
 {
-    famSpouse = fams;
+    m_famSpouse = fams;
 }
 
 string Individual::getFAMS()
 {
-    return famSpouse;
+    return m_famSpouse;
+}
+
+void Individual::setLineNumber(int lineNum)
+{
+	m_lineNumber = lineNum;
+}
+
+int Individual::getLineNumber()
+{
+	return m_lineNumber;
 }

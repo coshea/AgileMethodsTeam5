@@ -10,17 +10,19 @@
 #include "Family.h"
 #include <fstream>
 #include "Individual.h"
+#include "Logger.h"
 
 // US03 - check that birth occurs before death
-void BirthBeforeDeath(ofstream &errorStream, string first, Individual &i)
+void BirthBeforeDeath(string fileName, string first, Individual &i)
 {
 	Date  birth = i.getBirth();
 	Date  death = i.getDeath();
 	string name = i.getName();
 	string sex = i.getSex();
+	int lineNum = i.getLineNumber();
 
 	bool error = false; 
-
+	
 	if (death.getYear() == 0) 
 		return;
 
@@ -42,25 +44,32 @@ void BirthBeforeDeath(ofstream &errorStream, string first, Individual &i)
 
 	if (error)
 	{
+		Logger errorLog(fileName);
+
 		if (sex != "F")
 		{
-			errorStream << "Error US03: Birth date of " << name << " (" << first << ") occurs after his death date." << "\n";
+			errorLog(LogLevel::ERROR, lineNum) << 
+				"US03: Birth date of " << name << 
+				" (" << first << ") occurs after his death date." << "\n";
 		}
 		else
 		{
-			errorStream << "Error US03: Birth date of " << name << " (" << first << ") occurs after her death date." << "\n";
+			errorLog(LogLevel::ERROR, lineNum) << 
+				"US03: Birth date of " << name << 
+				" (" << first << ") occurs after her death date." << "\n";
 		}
 	}
 }
 
 // US02 - check that birth occurs before marriage
-void BirthBeforeMarriage(ofstream &errorStream, string first, Individual &i, Family &f)
+void BirthBeforeMarriage(string fileName, string first, Individual &i, Family &f)
 {
 	Date  birth = i.getBirth();
 	Date  married = f.getMarried();
 
 	string name = i.getName();
 	string sex = i.getSex();
+	int lineNum = i.getLineNumber();
 
 	bool error = false;
 
@@ -85,13 +94,18 @@ void BirthBeforeMarriage(ofstream &errorStream, string first, Individual &i, Fam
 
 	if (error)
 	{
+		Logger errorLog(fileName);
 		if (sex != "F")
 		{
-			errorStream << "Error US02: Birth date of " << name << " (" << first << ") occurs after his marriage date." << "\n";
+			errorLog(LogLevel::ERROR, lineNum) << 
+				"US02: Birth date of " << name << 
+				" (" << first << ") occurs after his marriage date." << "\n";
 		}
 		else
 		{
-			errorStream << "Error US02: Birth date of " << name << " (" << first << ") occurs after her marriage date." << "\n";
+			errorLog(LogLevel::ERROR, lineNum) << 
+				"US02: Birth date of " << name << 
+				" (" << first << ") occurs after her marriage date." << "\n";
 		}
 	}
 }

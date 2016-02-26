@@ -43,13 +43,18 @@ public:
     
     string getFAMS();
     
+	void setLineNumber(int lineNum);
+
+	int getLineNumber(void);
+
 private:
-    string name;
-    string sex;
-    Date   birth;
-    Date   death;
-    string famChild;
-    string famSpouse;
+    string m_name;
+    string m_sex;
+    Date   m_birth;
+    Date   m_death;
+    string m_famChild;
+    string m_famSpouse;
+	int m_lineNumber;
 };
 
 #endif /* Individual_h */

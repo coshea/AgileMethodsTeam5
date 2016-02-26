@@ -14,6 +14,7 @@
 #include "Individual.h"
 #include "Family.h"
 #include "GEDCOMManager.h"
+#include "UnitTest.h"
 //define consoleApp 1
 
 // Main function
@@ -42,9 +43,12 @@ int main(int argc, const char * argv[])
     string levelZeroID;
     string levelZeroTAG;
 	string levelOneTAG = "";
+	int lineNumber = 0;
 
     while (getline(gedcomFile, line))
     {
+		lineNumber++;
+
         // Write line to output file
         processedGEDCOM << line << "\n";
         
@@ -98,6 +102,7 @@ int main(int argc, const char * argv[])
             {
                 string name = tokenizedLine[2] + " " + tokenizedLine[3];
                 i.setName(name);
+				i.setLineNumber(lineNumber-1);//subtract 1 to get idx of level 0 tag
                 manager->addIndividual(levelZeroID, i);
             }
 			else if (level == 1 && tag == "SEX")

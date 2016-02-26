@@ -9,7 +9,7 @@
 #define Errors_h
 
 //
-void BirthBeforeDeath(ofstream &errorStream, string first, Individual &i);
-void BirthBeforeMarriage(ofstream &errorStream, string first, Individual &i, Family &f);
+void BirthBeforeDeath(string fileName, string first, Individual &i);
+void BirthBeforeMarriage(string fileName, string first, Individual &i, Family &f);
 
 #endif /* Errors_h */

@@ -27,6 +27,7 @@
     <ClCompile Include="Individual.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="TempLogStream.cpp" />
+    <ClCompile Include="UnitTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="Individual.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="TempLogStream.h" />
+    <ClInclude Include="UnitTest.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

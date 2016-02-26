@@ -57,7 +57,7 @@ void Logger::log(LogLevel logLevel, int lineNum, string message)
 
 	m_mutex.lock();
 	m_logFile << "Line " << lineNum << 
-			"\t"<< loglevelstr << ")\t" << 
+			" ("<< loglevelstr << ")\t" << 
 			message << endl;
 	m_mutex.unlock();
 }
