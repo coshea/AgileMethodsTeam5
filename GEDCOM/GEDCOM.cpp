@@ -16,10 +16,16 @@
 #include "GEDCOMManager.h"
 #include "UnitTest.h"
 //define consoleApp 1
+#define UNIT_TEST
 
 // Main function
 int main(int argc, const char * argv[])
 {
+#ifdef UNIT_TEST
+	UnitTestMain();
+	return 0;
+#endif
+
     GEDCOMManager *manager = GEDCOMManager::Instance();
     
     // Input file
