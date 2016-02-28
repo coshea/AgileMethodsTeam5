@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <string>
 #include <sstream>
+#include <ctime>
+#include <time.h>
 
 using namespace std;
 
@@ -23,6 +25,9 @@ public:
     
     // contructor
     Date(int d, int m, int y);
+
+	// contructor
+	Date(string d, string m, string y);
     
     void setMonth(int m);
     
@@ -41,11 +46,20 @@ public:
     string monthToString(int m);
 
 	int stringToMonth(string m);
-    
+
+	bool isInPast();
+
+	bool isDateValid();
+
 private:
     int month;
     int day;
     int year;
+	tm formattedDate;
+	time_t formmattedTime;
+
+	
+	void buildFormattedDate();
 };
 
 #endif /* Date_h */

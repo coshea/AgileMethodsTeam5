@@ -21,27 +21,29 @@
 // Main function
 int main(int argc, const char * argv[])
 {
-#ifdef UNIT_TEST
-	UnitTestMain();
-	return 0;
-#endif
+//#ifdef UNIT_TEST
+//	UnitTestMain();
+//	return 0;
+//#endif
 
     GEDCOMManager *manager = GEDCOMManager::Instance();
     
     // Input file
 	string inputFileName;
-#ifdef consoleApp
-	cout << "Please enter name of GEDCOM file: ";
-	cin >> inputFileName;
-	cout << endl;
-#else
+//#ifdef consoleApp
+//	cout << "Please enter name of GEDCOM file: ";
+//	cin >> inputFileName;
+//	cout << endl;
+//#else
 	inputFileName = argv[1];
-#endif
+//#endif
     // Input file
     ifstream gedcomFile(inputFileName);
 	
     // Output file
     string outputFileName = "processed" + string(inputFileName);
+	string errorFileName = "errors" + string(inputFileName);
+
     ofstream processedGEDCOM(outputFileName);
     
     // read lines from input file
@@ -136,10 +138,7 @@ int main(int argc, const char * argv[])
 			}
 			else if (level == 2 && tokenizedLine[1] == "DATE")
 			{
-				Date d;
-				d.setDay(stoi(tokenizedLine[2]));
-				d.setMonth(d.stringToMonth(tokenizedLine[3]));
-				d.setYear(stoi(tokenizedLine[4]));
+				Date d(tokenizedLine[2], tokenizedLine[3], tokenizedLine[4]);
 				if (levelOneTAG == "BIRT")
 				{
 					i.setBirth(d);
@@ -173,10 +172,7 @@ int main(int argc, const char * argv[])
 			}
 			else if (level == 2 && tokenizedLine[1] == "DATE")
 			{
-				Date d;
-				d.setDay(stoi(tokenizedLine[2]));
-				d.setMonth(d.stringToMonth(tokenizedLine[3]));
-				d.setYear(stoi(tokenizedLine[4]));
+				Date d(tokenizedLine[2], tokenizedLine[3], tokenizedLine[4]);
 				if (levelOneTAG == "MARR")
 				{
 					f.setMarried(d);
@@ -210,7 +206,7 @@ int main(int argc, const char * argv[])
     
     manager->printIndividuals(inputFileName);
     manager->printFamilies(inputFileName);
-	manager->errorCheck(inputFileName);
+	manager->errorCheck(errorFileName);
     
     processedGEDCOM.close();
 }

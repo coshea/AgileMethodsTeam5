@@ -109,3 +109,56 @@ void BirthBeforeMarriage(string fileName, string first, Individual &i, Family &f
 		}
 	}
 }
+
+
+void IsDateValid(string fileName, string first, Individual &i)
+{
+	Logger errorLog(fileName);
+	Date birth = i.getBirth();
+	Date death = i.getDeath();
+	int lineNum = i.getLineNumber();
+	string name = i.getName();
+
+	//US42 - Reject illegitimate dates
+	if (!birth.isDateValid())
+	{
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US42: Birth date of " << name <<
+			" (" << first << ") is not a valid date." << "\n";
+	}
+
+	//US42 - Reject illegitimate dates
+	if (i.isDead() && !death.isDateValid())
+	{
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US42: Death date of " << name <<
+			" (" << first << ") is not a valid date." << "\n";
+	}
+
+	//US01 - Dates before current date
+	if (!birth.isInPast())
+	{
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US01: Birth date of " << name <<
+			" (" << first << ") is not in the past." << "\n";
+	}
+
+	//US01 - Dates before current date
+	if (i.isDead() && !death.isDateValid())
+	{
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US01: Death date of " << name <<
+			" (" << first << ") is not in the past." << "\n";
+	}
+	
+
+	//US07 - Less then 150 years old
+	//Death should be less than 150 years after birth for dead people
+	//current date should be less than 150 years after birth for all living people
+	if (i.getAge() > 150)
+	{
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US07: " << name <<
+			" (" << first << ") is over 150 years old." << "\n";
+	}
+}

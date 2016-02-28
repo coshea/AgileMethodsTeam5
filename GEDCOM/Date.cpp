@@ -13,6 +13,7 @@ Date::Date()
     month = 0;
     day = 0;
     year = 0;
+	buildFormattedDate();
 }
 
 // contructor
@@ -21,6 +22,16 @@ Date::Date(int d, int m, int y)
     month = m;
     day = d;
     year = y;
+	buildFormattedDate();
+};
+
+// contructor
+Date::Date(string d, string m, string y)
+{
+	month = stringToMonth(m);
+	day = stoi(d);
+	year = stoi(y);
+	buildFormattedDate();
 };
 
 void Date::setMonth(int m)
@@ -123,3 +134,62 @@ int Date::stringToMonth(string m)
 
 	return ret;
 };
+
+
+
+
+//US42 Reject illegitimate dates
+//All dates should be legitimate dates for the months specified
+bool Date::isDateValid()
+{
+	if (month < 1 || month > 12)
+		return false;
+
+	if (day < 1 || day > 31)
+		return false;
+
+	if (day == 31 && (month == 2 || month == 4 || month == 6 || month == 9 || month == 11))
+		return false;
+
+	if (month == 2)
+	{
+		if (day > 29)
+			return false;
+
+		if (day == 29)
+		{
+			if (year % 4 != 0)
+				return false;
+			if (year % 400 == 0)
+				return true;
+			if (year % 100 == 0)
+				return false;
+		}
+	}
+	return true;
+};
+
+//US01 Dates before current date
+//Dates (birth, marriage, divorce, death) should not be after the current date
+bool Date::isInPast()  
+{
+	time_t currentTime = time(0); //
+
+	if (formmattedTime < currentTime)
+		return true;
+	else
+		return false;
+};
+
+void Date::buildFormattedDate()
+{
+	formattedDate = { 0 }; //
+	formattedDate.tm_mon = month - 1;
+	formattedDate.tm_mday = day;
+	formattedDate.tm_year = year - 1900;
+	formattedDate.tm_hour = 0;
+	formattedDate.tm_min = 0;
+	formattedDate.tm_sec = 0;
+
+	formmattedTime = mktime(&formattedDate);
+}

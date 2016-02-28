@@ -88,3 +88,46 @@ int Individual::getLineNumber()
 {
 	return m_lineNumber;
 }
+
+bool Individual::isDead()
+{
+	if (m_death.getDay() == 0 && m_death.getMonth() == 0 && m_death.getYear() == 0)
+		return false;
+	else
+		return true;
+}
+
+int Individual::getAge()
+{
+	int years = 0;
+
+	if (isDead())
+	{
+		years = m_death.getYear() - m_birth.getYear();
+		if (m_birth.getMonth() == m_death.getMonth())
+		{
+			if (m_birth.getDay() > m_death.getDay())
+				years--;
+		}
+		else if (m_birth.getMonth() > m_death.getMonth())
+			years--;
+	}
+	else 
+	{
+		time_t currentTime = time(0);	
+		struct tm compareDate;
+		localtime_s(&compareDate, &currentTime);
+
+		years = (compareDate.tm_year + 1900) - m_birth.getYear();
+		if (m_birth.getMonth() == (compareDate.tm_mon + 1))
+		{
+			if (m_birth.getDay() > (compareDate.tm_mday))
+				years--;
+		}
+		else if (m_birth.getMonth() > (compareDate.tm_mon + 1))
+			years--;
+	}
+		
+	
+	return years;
+}

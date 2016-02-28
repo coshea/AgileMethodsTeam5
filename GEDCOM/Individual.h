@@ -47,6 +47,10 @@ public:
 
 	int getLineNumber(void);
 
+	bool isDead();
+
+	int getAge();
+
 private:
     string m_name;
     string m_sex;
