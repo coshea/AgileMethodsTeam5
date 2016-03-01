@@ -173,7 +173,7 @@ bool Date::isDateValid()
 //Dates (birth, marriage, divorce, death) should not be after the current date
 bool Date::isInPast()  
 {
-	time_t currentTime = time(0); //
+	time_t currentTime = time(0);
 
 	if (formmattedTime < currentTime)
 		return true;
@@ -183,7 +183,7 @@ bool Date::isInPast()
 
 void Date::buildFormattedDate()
 {
-	formattedDate = { 0 }; //
+	formattedDate = { 0 };
 	formattedDate.tm_mon = month - 1;
 	formattedDate.tm_mday = day;
 	formattedDate.tm_year = year - 1900;
