@@ -193,3 +193,29 @@ void Date::buildFormattedDate()
 
 	formmattedTime = mktime(&formattedDate);
 }
+
+bool Date::occursBefore(Date target)
+{
+	bool retVal = false;
+
+	if (target.getYear() == 0)
+		return retVal;
+
+	if (target.getYear() < year)
+	{
+		retVal = true;
+	}
+	else if ((target.getYear() == year) &&
+		(target.getMonth() < month))
+	{
+		retVal = true;
+	}
+	else if ((target.getYear() == year) &&
+		(target.getMonth() == month) &&
+		(target.getDay() < day))
+	{
+		retVal = true;
+	}
+
+	return retVal;
+}

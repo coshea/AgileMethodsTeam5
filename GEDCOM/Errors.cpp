@@ -18,95 +18,43 @@ void BirthBeforeDeath(string fileName, string first, Individual &i)
 	Date  birth = i.getBirth();
 	Date  death = i.getDeath();
 	string name = i.getName();
-	string sex = i.getSex();
+	string sex  = i.getSex();
 	int lineNum = i.getLineNumber();
 
-	bool error = false; 
-	
-	if (death.getYear() == 0) 
-		return;
-
-	if (death.getYear() < birth.getYear())
-	{
-		error = true;
-	}
-	else if ((death.getYear() == birth.getYear()) && 
-		(death.getMonth() < birth.getMonth()))
-	{
-		error = true;
-	}
-	else if ((death.getYear() == birth.getYear()) &&
-		(death.getMonth() == birth.getMonth()) &&
-		(death.getDay() < birth.getDay()))
-	{
-		error = true;
-	}
-
-	if (error)
+	if (birth.occursBefore(death))
 	{
 		Logger errorLog(fileName);
+		string pronoun = "her";
 
 		if (sex != "F")
-		{
-			errorLog(LogLevel::ERROR, lineNum) << 
-				"US03: Birth date of " << name << 
-				" (" << first << ") occurs after his death date." << "\n";
-		}
-		else
-		{
-			errorLog(LogLevel::ERROR, lineNum) << 
-				"US03: Birth date of " << name << 
-				" (" << first << ") occurs after her death date." << "\n";
-		}
+			pronoun = "his";
+			
+		errorLog(LogLevel::ERROR, lineNum) << 
+		    "US03: Birth date of " << name << " (" << first << 
+			") occurs after " << pronoun << " death date." << "\n";
 	}
 }
 
 // US02 - check that birth occurs before marriage
 void BirthBeforeMarriage(string fileName, string first, Individual &i, Family &f)
 {
-	Date  birth = i.getBirth();
+	Date  birth   = i.getBirth();
 	Date  married = f.getMarried();
+	string name   = i.getName();
+	string sex    = i.getSex();
+	int lineNum   = i.getLineNumber();
 
-	string name = i.getName();
-	string sex = i.getSex();
-	int lineNum = i.getLineNumber();
-
-	bool error = false;
-
-	if (married.getYear() == 0)
-		return;
-
-	if (married.getYear() < birth.getYear())
-	{
-		error = true;
-	}
-	else if ((married.getYear() == birth.getYear()) &&
-		(married.getMonth() < birth.getMonth()))
-	{
-		error = true;
-	}
-	else if ((married.getYear() == birth.getYear()) &&
-		(married.getMonth() == birth.getMonth()) &&
-		(married.getDay() < birth.getDay()))
-	{
-		error = true;
-	}
-
-	if (error)
+	if (birth.occursBefore(married))
 	{
 		Logger errorLog(fileName);
+		string pronoun = "her";
+
 		if (sex != "F")
-		{
-			errorLog(LogLevel::ERROR, lineNum) << 
-				"US02: Birth date of " << name << 
-				" (" << first << ") occurs after his marriage date." << "\n";
-		}
-		else
-		{
-			errorLog(LogLevel::ERROR, lineNum) << 
-				"US02: Birth date of " << name << 
-				" (" << first << ") occurs after her marriage date." << "\n";
-		}
+			pronoun = "his";
+
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US03: Birth date of " << name << " (" << first <<
+			") occurs after " << pronoun << " marriage date." << "\n";
 	}
 }
 

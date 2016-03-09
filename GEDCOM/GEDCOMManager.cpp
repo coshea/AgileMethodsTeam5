@@ -98,6 +98,10 @@ void GEDCOMManager::printFamilies(string fileName)
 
 void GEDCOMManager::errorCheck(string fileName)
 {	
+	// initialize error output file
+	ofstream errorStream(fileName);
+	errorStream.close();
+
 	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
 	{
 		if (i->second.getFAMS() != "")
