@@ -15,28 +15,17 @@
 #include "Family.h"
 #include "GEDCOMManager.h"
 #include "UnitTest.h"
-//define consoleApp 1
-#define UNIT_TEST
 
 // Main function
 int main(int argc, const char * argv[])
 {
-//#ifdef UNIT_TEST
-//	UnitTestMain();
-//	return 0;
-//#endif
-
     GEDCOMManager *manager = GEDCOMManager::Instance();
     
     // Input file
 	string inputFileName;
-//#ifdef consoleApp
-//	cout << "Please enter name of GEDCOM file: ";
-//	cin >> inputFileName;
-//	cout << endl;
-//#else
+
 	inputFileName = argv[1];
-//#endif
+
     // Input file
     ifstream gedcomFile(inputFileName);
 	
