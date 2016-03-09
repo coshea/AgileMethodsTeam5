@@ -11,6 +11,9 @@
 //
 void BirthBeforeDeath(string fileName, string first, Individual &i);
 void BirthBeforeMarriage(string fileName, string first, Individual &i, Family &f);
+void MarriageBeforeDivorce(string fileName, string first, Individual &i, Family &f);
+void MarriageBeforeDeath(string fileName, string first, Individual &i, Family &f);
+void DivorceBeforeDeath(string fileName, string first, Individual &i, Family &f);
 void IsDateValid(string fileName, string first, Individual &i);
 
 #endif /* Errors_h */

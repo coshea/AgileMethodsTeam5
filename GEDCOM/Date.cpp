@@ -194,7 +194,7 @@ void Date::buildFormattedDate()
 	formmattedTime = mktime(&formattedDate);
 }
 
-bool Date::occursBefore(Date target)
+bool Date::occursAfter(Date target)
 {
 	bool retVal = false;
 

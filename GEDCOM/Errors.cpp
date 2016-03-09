@@ -21,7 +21,7 @@ void BirthBeforeDeath(string fileName, string first, Individual &i)
 	string sex  = i.getSex();
 	int lineNum = i.getLineNumber();
 
-	if (birth.occursBefore(death))
+	if (birth.occursAfter(death))
 	{
 		Logger errorLog(fileName);
 		string pronoun = "her";
@@ -44,7 +44,7 @@ void BirthBeforeMarriage(string fileName, string first, Individual &i, Family &f
 	string sex    = i.getSex();
 	int lineNum   = i.getLineNumber();
 
-	if (birth.occursBefore(married))
+	if (birth.occursAfter(married))
 	{
 		Logger errorLog(fileName);
 		string pronoun = "her";
@@ -53,11 +53,79 @@ void BirthBeforeMarriage(string fileName, string first, Individual &i, Family &f
 			pronoun = "his";
 
 		errorLog(LogLevel::ERROR, lineNum) <<
-			"US03: Birth date of " << name << " (" << first <<
+			"US02: Birth date of " << name << " (" << first <<
 			") occurs after " << pronoun << " marriage date." << "\n";
 	}
 }
 
+// US04 - check that marriage occurs before divorce
+void MarriageBeforeDivorce(string fileName, string first, Individual &i, Family &f)
+{
+	Date  married = f.getMarried();
+	Date  divorce = f.getDivorced();
+	string name   = i.getName();
+	string sex    = i.getSex();
+	int lineNum   = i.getLineNumber();
+
+	if (married.occursAfter(divorce))
+	{
+		Logger errorLog(fileName);
+		string pronoun = "her";
+
+		if (sex != "F")
+			pronoun = "his";
+
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US04: Marriage date of " << name << " (" << first <<
+			") occurs after " << pronoun << " divorce date." << "\n";
+	}
+}
+
+// US05 - check that marriage occurs before death
+void MarriageBeforeDeath(string fileName, string first, Individual &i, Family &f)
+{
+	Date  death   = i.getDeath();
+	Date  married = f.getMarried();
+	string name   = i.getName();
+	string sex    = i.getSex();
+	int lineNum   = i.getLineNumber();
+
+	if (married.occursAfter(death))
+	{
+		Logger errorLog(fileName);
+		string pronoun = "her";
+
+		if (sex != "F")
+			pronoun = "his";
+
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US05: Marriage date of " << name << " (" << first <<
+			") occurs after " << pronoun << " death date." << "\n";
+	}
+}
+
+// US06 - check that divorce occurs before death
+void DivorceBeforeDeath(string fileName, string first, Individual &i, Family &f)
+{
+	Date  death    = i.getDeath();
+	Date  divorced = f.getDivorced();
+	string name    = i.getName();
+	string sex     = i.getSex();
+	int lineNum    = i.getLineNumber();
+
+	if (divorced.occursAfter(death))
+	{
+		Logger errorLog(fileName);
+		string pronoun = "her";
+
+		if (sex != "F")
+			pronoun = "his";
+
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US06: Divorce date of " << name << " (" << first <<
+			") occurs after " << pronoun << " death date." << "\n";
+	}
+}
 
 void IsDateValid(string fileName, string first, Individual &i)
 {

@@ -108,9 +108,16 @@ void GEDCOMManager::errorCheck(string fileName)
 		{
 			// US02
 			BirthBeforeMarriage(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));
+			// US04
+			MarriageBeforeDivorce(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));
+			// US05
+			MarriageBeforeDeath(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));
+			// US06
+			DivorceBeforeDeath(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));
 		}
 		// US03
 		BirthBeforeDeath(fileName, i->first, i->second);
+		
 
 		//US01, US07, US42
 		IsDateValid(fileName, i->first, i->second);

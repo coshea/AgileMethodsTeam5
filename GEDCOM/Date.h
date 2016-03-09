@@ -51,7 +51,7 @@ public:
 
 	bool isDateValid();
 
-	bool occursBefore(Date target);
+	bool occursAfter(Date target);
 
 private:
     int month;
