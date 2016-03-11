@@ -98,7 +98,8 @@ void GEDCOMManager::printFamilies(string fileName)
 
 void GEDCOMManager::errorCheck(string fileName)
 {	
-	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
+	// First check for individual errors
+	for (map<string, Individual>::iterator i = individuals.begin(); i != individuals.end(); ++i)
 	{
 		if (i->second.getFAMS() != "")
 		{
@@ -110,5 +111,12 @@ void GEDCOMManager::errorCheck(string fileName)
 
 		//US01, US07, US42
 		IsDateValid(fileName, i->first, i->second);
+	}
+
+	// Then check for family errors
+	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)
+	{
+		//US 21
+		CorrectGender(fileName, i->first);
 	}
 }

@@ -162,3 +162,28 @@ void IsDateValid(string fileName, string first, Individual &i)
 			" (" << first << ") is over 150 years old." << "\n";
 	}
 }
+
+// US21
+void CorrectGender(string fileName, string familyID)
+{
+	Family fam;
+	Individual husband, wife;
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	fam = manager->lookupFamily(familyID);
+	husband = manager->lookupIndividual(fam.getHusband());
+	wife = manager->lookupIndividual(fam.getWife());
+
+	if (husband.getSex() != "M")
+	{
+		errorLog(LogLevel::ERROR, husband.getLineNumber()) <<
+			"Husband from family (" << familyID << ") is not a male." << "\n";
+	}
+
+	if (wife.getSex() != "F")
+	{
+		errorLog(LogLevel::ERROR, wife.getLineNumber()) <<
+			"Wife from family (" << familyID << ") is not a female." << "\n";
+	}
+}

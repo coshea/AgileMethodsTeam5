@@ -12,5 +12,6 @@
 void BirthBeforeDeath(string fileName, string first, Individual &i);
 void BirthBeforeMarriage(string fileName, string first, Individual &i, Family &f);
 void IsDateValid(string fileName, string first, Individual &i);
+void CorrectGender(string fileName, string familyID);
 
 #endif /* Errors_h */

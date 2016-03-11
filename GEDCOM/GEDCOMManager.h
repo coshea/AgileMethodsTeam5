@@ -42,6 +42,12 @@ public:
     void printFamilies(string fileName);
 
 	void errorCheck(string fileName);
+
+	enum IDType 
+	{
+		FAMILY,
+		INDIVIDUAL
+	};
     
 private:
     
