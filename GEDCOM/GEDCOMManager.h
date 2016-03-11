@@ -21,7 +21,7 @@ class GEDCOMManager
 public:
     static GEDCOMManager* Instance();
     
-    void addIndividual(string id);
+    string addIndividual(string id, int currentLineNum, string errorFile);
     
     void addIndividual(string id, Individual i);
     
@@ -29,7 +29,7 @@ public:
     
     void printIndividuals(string fileName);
     
-    void addFamily(string id);
+    string addFamily(string id, int currentLineNum, string errorFile);
     
     void addFamily(string id, Family f);
     

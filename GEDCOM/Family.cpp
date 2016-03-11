@@ -8,59 +8,72 @@
 
 #include "Family.h"
 
-
-
 Family::Family()
 {
-    
+	m_married = { 0, 0, 0 };
+	m_divorced = { 0, 0, 0 };
+	m_husband = "";
+	m_wife = "";
+	//m_children;
+	m_lineNumber = -1;
 }
 
 void Family::setMarried(Date m)
 {
-    married = m;
+	m_married = m;
 }
 
 Date Family::getMarried()
 {
-    return married;
+    return m_married;
 }
 
 void Family::setDivorced(Date d)
 {
-    divorced = d;
+	m_divorced = d;
 }
 
 Date Family::getDivorced()
 {
-    return divorced;
+    return m_divorced;
 }
 
 void Family::setHusband(string h)
 {
-    husband = h;
+	m_husband = h;
 }
 
 string Family::getHusband()
 {
-    return husband;
+    return m_husband;
 }
 
 void Family::setWife(string w)
 {
-    wife = w;
+	m_wife = w;
 }
 
 string Family::getWife()
 {
-    return wife;
+    return m_wife;
 }
 
 void Family::addChild(string child)
 {
-    children.push_back(child);
+	m_children.push_back(child);
 }
 
 vector<string> Family::getChildren()
 {
-    return children;
+    return m_children;
+}
+
+void Family::setLineNumber(int lineNum)
+{
+	m_lineNumber = lineNum;
+}
+
+int Family::getLineNumber()
+{
+	return m_lineNumber;
 }

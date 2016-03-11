@@ -16,17 +16,9 @@
 #include "GEDCOMManager.h"
 #include "UnitTest.h"
 
-//define consoleApp
-//define UNIT_TEST
-
 // Main function
 int main(int argc, const char * argv[])
 {
-#ifdef UNIT_TEST
-	UnitTestMain();
-	return 0;
-#endif
-
     GEDCOMManager *manager = GEDCOMManager::Instance();
     
     // Input file
@@ -111,7 +103,7 @@ int main(int argc, const char * argv[])
             {
                 string name = tokenizedLine[2] + " " + tokenizedLine[3];
                 i.setName(name);
-				i.setLineNumber(lineNumber-1);//subtract 1 to get idx of level 0 tag
+				i.setLineNumber(lineNumber - 1);//Subtract 1 to get the idx of INDI
                 manager->addIndividual(levelZeroID, i);
             }
 			else if (level == 1 && tag == "SEX")
@@ -160,12 +152,17 @@ int main(int argc, const char * argv[])
             if(level == 1 && tag == "HUSB")
             {
                 // Add husband
-                manager->addHusbandToFamily(tokenizedLine[2], levelZeroID);
+                //manager->addHusbandToFamily(tokenizedLine[2], levelZeroID);
+				f.setHusband(tokenizedLine[2]);
+				f.setLineNumber(lineNumber - 1);//Subtract 1 to get the idx of FAM
+				manager->addFamily(levelZeroID, f);
             }
             else if(level == 1 && tag == "WIFE")
             {
                 // Add wife
-                manager->addWifeToFamily(tokenizedLine[2], levelZeroID);
+                //manager->addWifeToFamily(tokenizedLine[2], levelZeroID);
+				f.setWife(tokenizedLine[2]);
+				manager->addFamily(levelZeroID, f);
             }
 			else if (level == 1 && tag == "MARR")
 			{
@@ -194,10 +191,9 @@ int main(int argc, const char * argv[])
         if(tag == "INDI")
         {
             // Store empty INDI with unique ID
-            manager->addIndividual(ID);
-            
+			levelZeroID = manager->addIndividual(ID, lineNumber, errorFileName);
+
             // Set levelZero variables to process other lines for INDI
-            levelZeroID = ID;
             levelZeroTAG = tag;
 			levelOneTAG = "";
         }
@@ -205,10 +201,9 @@ int main(int argc, const char * argv[])
         if(tag == "FAM")
         {
             // Store empty INDI with unique ID
-            manager->addFamily(ID);
+			levelZeroID = manager->addFamily(ID, lineNumber, errorFileName);
             
             // Set levelZero variables to process other lines for FAM
-            levelZeroID = ID;
             levelZeroTAG = tag;
 			levelOneTAG = "";
         }

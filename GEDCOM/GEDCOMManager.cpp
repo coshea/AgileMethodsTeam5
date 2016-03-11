@@ -26,9 +26,19 @@ GEDCOMManager* GEDCOMManager::Instance()
 }
 
 
-void GEDCOMManager::addIndividual(string id)
+string GEDCOMManager::addIndividual(string id, int currentLineNum, string errorFile)
 {
-    individuals[id] = *new Individual;
+	for (map<string, Individual>::iterator i = individuals.begin(); i != individuals.end(); i++)
+	{
+		if (i->first == id)
+		{
+			int firstLineNum = lookupIndividual(i->first).getLineNumber();
+			id = CorrectRepeatedID(id, currentLineNum, firstLineNum, errorFile);
+		}
+	}
+	individuals[id] = *new Individual;
+
+	return id;
 }
 
 void GEDCOMManager::addIndividual(string id, Individual i)
@@ -52,9 +62,20 @@ void GEDCOMManager::printIndividuals(string fileName)
     individualStream.close();
 }
 
-void GEDCOMManager::addFamily(string id)
+string GEDCOMManager::addFamily(string id, int currentLineNum, string errorFile)
 {
+	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)
+	{
+		if (i->first == id)
+		{
+			Family f = lookupFamily(i->first);
+			int firstLineNum = f.getLineNumber();
+			id = CorrectRepeatedID(id, currentLineNum, firstLineNum, errorFile);
+		}
+	}
     families[id] = *new Family;
+
+	return id;
 }
 
 void GEDCOMManager::addFamily(string id, Family f)
@@ -69,18 +90,13 @@ Family GEDCOMManager::lookupFamily(string id)
 
 void GEDCOMManager::addHusbandToFamily(string husbID, string famID)
 {
-    Family f = families.find(famID)->second;
-    f.setHusband(husbID);
-    families[famID] = f;
+	families[famID].setHusband(husbID);
 }
 
 void GEDCOMManager::addWifeToFamily(string wifeID, string famID)
 {
-    Family f = families.find(famID)->second;
-    f.setWife(wifeID);
-    families[famID] = f;
+	families[famID].setWife(wifeID);
 }
-
 
 void GEDCOMManager::printFamilies(string fileName)
 {
@@ -89,8 +105,8 @@ void GEDCOMManager::printFamilies(string fileName)
     for(map<string, Family >::iterator f = families.begin(); f != families.end(); ++f)
     {
         familyStream << f->first << "\n\t"
-        << "Husband: " << lookupIndividual(f->second.getHusband()).getName() << "\n\t"
-        << "Wife: " << lookupIndividual(f->second.getWife()).getName() << "\n";
+			<< "Husband: " << lookupIndividual(f->second.getHusband()).getName() << "\n\t"
+			<< "Wife: " << lookupIndividual(f->second.getWife()).getName() << "\n";
     }
     familyStream.close();
 }
@@ -98,7 +114,7 @@ void GEDCOMManager::printFamilies(string fileName)
 
 void GEDCOMManager::errorCheck(string fileName)
 {	
-	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
+	for (map<string, Individual>::iterator i = individuals.begin(); i != individuals.end(); ++i)
 	{
 		if (i->second.getFAMS() != "")
 		{
@@ -114,7 +130,6 @@ void GEDCOMManager::errorCheck(string fileName)
 		// US03
 		BirthBeforeDeath(fileName, i->first, i->second);
 
-
 		//US01, US07, US42
 		IsDateValid(fileName, i->first, i->second);
 	}
@@ -122,7 +137,7 @@ void GEDCOMManager::errorCheck(string fileName)
 	// Then check for family errors
 	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)
 	{
-		//US 21
+		//US21
 		CorrectGender(fileName, i->first);
 	}
 }

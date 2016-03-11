@@ -194,12 +194,28 @@ void CorrectGender(string fileName, string familyID)
 	if (husband.getSex() != "M")
 	{
 		errorLog(LogLevel::ERROR, husband.getLineNumber()) <<
-			"Husband from family (" << familyID << ") is not a male." << "\n";
+			"US21: Husband from family (" << familyID << ") is not a male." << "\n";
 	}
 
 	if (wife.getSex() != "F")
 	{
 		errorLog(LogLevel::ERROR, wife.getLineNumber()) <<
-			"Wife from family (" << familyID << ") is not a female." << "\n";
+			"US21: Wife from family (" << familyID << ") is not a female." << "\n";
 	}
+}
+
+//US 22
+string CorrectRepeatedID(string id, int currentLineNum, int firstLineNum, string fileName)
+{
+	Logger errorLog(fileName);
+	string newID = id + "_" + to_string(currentLineNum);
+
+	errorLog(LogLevel::ERROR, currentLineNum) << "US22: " <<
+		id << " is repeated on line " << 
+		firstLineNum << " and " << currentLineNum << ".\n";
+	errorLog(LogLevel::INFO, currentLineNum) << "US22: " <<
+		id << " at line " << currentLineNum <<
+		" has been changed to " << newID << " to maintain unique IDs.\n";
+
+	return newID;
 }
