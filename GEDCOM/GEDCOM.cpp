@@ -16,19 +16,31 @@
 #include "GEDCOMManager.h"
 #include "UnitTest.h"
 
+//define consoleApp
+//define UNIT_TEST
+
 // Main function
 int main(int argc, const char * argv[])
 {
+#ifdef UNIT_TEST
+	UnitTestMain();
+	return 0;
+#endif
+
     GEDCOMManager *manager = GEDCOMManager::Instance();
     
     // Input file
 	string inputFileName;
-
+#ifdef consoleApp
+	cout << "Please enter name of GEDCOM file: ";
+	cin >> inputFileName;
+	cout << endl;
+#else
 	inputFileName = argv[1];
-
+#endif
     // Input file
     ifstream gedcomFile(inputFileName);
-	
+
     // Output file
     string outputFileName = "processed" + string(inputFileName);
 	string errorFileName = "errors" + string(inputFileName);
@@ -159,12 +171,21 @@ int main(int argc, const char * argv[])
 			{
 				levelOneTAG = "MARR";
 			}
+			else if (level == 1 && tag == "DIV")
+			{
+				levelOneTAG = "DIV";
+			}
 			else if (level == 2 && tokenizedLine[1] == "DATE")
 			{
 				Date d(tokenizedLine[2], tokenizedLine[3], tokenizedLine[4]);
 				if (levelOneTAG == "MARR")
 				{
 					f.setMarried(d);
+					manager->addFamily(levelZeroID, f);
+				}
+				else if (levelOneTAG == "DIV")
+				{
+					f.setDivorced(d);
 					manager->addFamily(levelZeroID, f);
 				}
 			}

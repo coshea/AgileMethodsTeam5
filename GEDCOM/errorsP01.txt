@@ -13,3 +13,4 @@ Line 34 (ERROR)	US06: Divorce date of Betty Smith/Boop (@I05@) occurs after her 
 Line 34 (ERROR)	US03: Birth date of Betty Smith/Boop (@I05@) occurs after her death date.
 
 Line 42 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I06@) occurs after her death date.
+
