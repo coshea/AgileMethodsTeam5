@@ -2,3 +2,8 @@ DerivedData/
 GEDCOM.xcodeproj/
 /GEDCOM/x64/Debug
 /UnitTests/x64/Debug
+*.user
+/GEDCOM/ipch/
+/GEDCOM/.vs/
+*.sdf
+*.opendb
