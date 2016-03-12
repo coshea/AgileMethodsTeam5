@@ -62,6 +62,34 @@ void GEDCOMManager::printIndividuals(string fileName)
     individualStream.close();
 }
 
+void GEDCOMManager::printLivingMarried(string fileName)
+{
+	string outputFileName = "livingMarried" + string(fileName);
+	ofstream individualStream(outputFileName);
+	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
+	{
+		if (!i->second.isDead() && i->second.getFAMS() != "")
+		{
+			individualStream << i->first << " " << i->second.getName() << "\n";
+		}
+	}
+	individualStream.close();
+}
+
+void GEDCOMManager::printLivingSingle(string fileName)
+{
+	string outputFileName = "livingSingle" + string(fileName);
+	ofstream individualStream(outputFileName);
+	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
+	{
+		if (!i->second.isDead() && i->second.getFAMS() == "")
+		{
+			individualStream << i->first << " " << i->second.getName() << "\n";
+		}
+	}
+	individualStream.close();
+}
+
 string GEDCOMManager::addFamily(string id, int currentLineNum, string errorFile)
 {
 	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)

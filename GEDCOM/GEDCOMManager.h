@@ -28,6 +28,12 @@ public:
     Individual lookupIndividual(string id);
     
     void printIndividuals(string fileName);
+
+	// US30 - List living Married
+	void printLivingMarried(string fileName);
+
+	// US31 - List living Single
+	void printLivingSingle(string fileName);
     
     string addFamily(string id, int currentLineNum, string errorFile);
     

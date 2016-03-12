@@ -211,6 +211,8 @@ int main(int argc, const char * argv[])
     
     manager->printIndividuals(inputFileName);
     manager->printFamilies(inputFileName);
+	manager->printLivingMarried(inputFileName);
+	manager->printLivingSingle(inputFileName);
 	manager->errorCheck(errorFileName);
     
     processedGEDCOM.close();
