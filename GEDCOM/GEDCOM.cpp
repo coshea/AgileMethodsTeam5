@@ -15,31 +15,24 @@
 #include "Family.h"
 #include "GEDCOMManager.h"
 #include "UnitTest.h"
-//define consoleApp 1
-#define UNIT_TEST
 
 // Main function
 int main(int argc, const char * argv[])
 {
-//#ifdef UNIT_TEST
-//	UnitTestMain();
-//	return 0;
-//#endif
-
     GEDCOMManager *manager = GEDCOMManager::Instance();
     
     // Input file
 	string inputFileName;
-//#ifdef consoleApp
-//	cout << "Please enter name of GEDCOM file: ";
-//	cin >> inputFileName;
-//	cout << endl;
-//#else
+#ifdef consoleApp
+	cout << "Please enter name of GEDCOM file: ";
+	cin >> inputFileName;
+	cout << endl;
+#else
 	inputFileName = argv[1];
-//#endif
+#endif
     // Input file
     ifstream gedcomFile(inputFileName);
-	
+
     // Output file
     string outputFileName = "processed" + string(inputFileName);
 	string errorFileName = "errors" + string(inputFileName);
@@ -110,7 +103,7 @@ int main(int argc, const char * argv[])
             {
                 string name = tokenizedLine[2] + " " + tokenizedLine[3];
                 i.setName(name);
-				i.setLineNumber(lineNumber-1);//subtract 1 to get idx of level 0 tag
+				i.setLineNumber(lineNumber - 1);//Subtract 1 to get the idx of INDI
                 manager->addIndividual(levelZeroID, i);
             }
 			else if (level == 1 && tag == "SEX")
@@ -159,16 +152,25 @@ int main(int argc, const char * argv[])
             if(level == 1 && tag == "HUSB")
             {
                 // Add husband
-                manager->addHusbandToFamily(tokenizedLine[2], levelZeroID);
+                //manager->addHusbandToFamily(tokenizedLine[2], levelZeroID);
+				f.setHusband(tokenizedLine[2]);
+				f.setLineNumber(lineNumber - 1);//Subtract 1 to get the idx of FAM
+				manager->addFamily(levelZeroID, f);
             }
             else if(level == 1 && tag == "WIFE")
             {
                 // Add wife
-                manager->addWifeToFamily(tokenizedLine[2], levelZeroID);
+                //manager->addWifeToFamily(tokenizedLine[2], levelZeroID);
+				f.setWife(tokenizedLine[2]);
+				manager->addFamily(levelZeroID, f);
             }
 			else if (level == 1 && tag == "MARR")
 			{
 				levelOneTAG = "MARR";
+			}
+			else if (level == 1 && tag == "DIV")
+			{
+				levelOneTAG = "DIV";
 			}
 			else if (level == 2 && tokenizedLine[1] == "DATE")
 			{
@@ -178,16 +180,20 @@ int main(int argc, const char * argv[])
 					f.setMarried(d);
 					manager->addFamily(levelZeroID, f);
 				}
+				else if (levelOneTAG == "DIV")
+				{
+					f.setDivorced(d);
+					manager->addFamily(levelZeroID, f);
+				}
 			}
         }
         
         if(tag == "INDI")
         {
             // Store empty INDI with unique ID
-            manager->addIndividual(ID);
-            
+			levelZeroID = manager->addIndividual(ID, lineNumber, errorFileName);
+
             // Set levelZero variables to process other lines for INDI
-            levelZeroID = ID;
             levelZeroTAG = tag;
 			levelOneTAG = "";
         }
@@ -195,10 +201,9 @@ int main(int argc, const char * argv[])
         if(tag == "FAM")
         {
             // Store empty INDI with unique ID
-            manager->addFamily(ID);
+			levelZeroID = manager->addFamily(ID, lineNumber, errorFileName);
             
             // Set levelZero variables to process other lines for FAM
-            levelZeroID = ID;
             levelZeroTAG = tag;
 			levelOneTAG = "";
         }
@@ -206,6 +211,8 @@ int main(int argc, const char * argv[])
     
     manager->printIndividuals(inputFileName);
     manager->printFamilies(inputFileName);
+	manager->printLivingMarried(inputFileName);
+	manager->printLivingSingle(inputFileName);
 	manager->errorCheck(errorFileName);
     
     processedGEDCOM.close();

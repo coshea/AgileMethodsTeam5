@@ -21,15 +21,21 @@ class GEDCOMManager
 public:
     static GEDCOMManager* Instance();
     
-    void addIndividual(string id);
+    string addIndividual(string id, int currentLineNum, string errorFile);
     
     void addIndividual(string id, Individual i);
     
     Individual lookupIndividual(string id);
     
     void printIndividuals(string fileName);
+
+	// US30 - List living Married
+	void printLivingMarried(string fileName);
+
+	// US31 - List living Single
+	void printLivingSingle(string fileName);
     
-    void addFamily(string id);
+    string addFamily(string id, int currentLineNum, string errorFile);
     
     void addFamily(string id, Family f);
     
@@ -42,6 +48,12 @@ public:
     void printFamilies(string fileName);
 
 	void errorCheck(string fileName);
+
+	enum IDType 
+	{
+		FAMILY,
+		INDIVIDUAL
+	};
     
 private:
     

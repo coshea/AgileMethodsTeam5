@@ -39,13 +39,18 @@ public:
     void addChild(string child);
     
     vector<string> getChildren();
+
+	void setLineNumber(int lineNum);
+
+	int getLineNumber();
     
 private:
-	Date married = { 0, 0, 0 };
-	Date divorced = { 0, 0, 0 };
-    string husband;
-    string wife;
-    vector<string> children;
+	Date m_married = { 0, 0, 0 };
+	Date m_divorced = { 0, 0, 0 };
+    string m_husband;
+    string m_wife;
+    vector<string> m_children;
+	int m_lineNumber;
 };
 
 #endif /* Family_h */
