@@ -14,21 +14,17 @@ Line 34 (ERROR)	US03: Birth date of Betty Smith/Boop (@I05@) occurs after her de
 
 Line 42 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I06@) occurs after her death date.
 
-Line 90 (ERROR)	US22: @F02@ is repeated on line 83 and 90.
+Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I03@) is after parents divorce.
 
-Line 90 (INFO)	US22: @F02@ at line 90 has been changed to @F02@_90 to maintain unique IDs.
+Line 28 (ERROR)	US08: Birth date of Janet Smith (@I04@) is before parents marriage.
 
-Line 4 (ERROR)	US04: Marriage date of John Smith (@I01@) occurs after his divorce date.
+Line 62 (ERROR)	US09: Birth date of Mary Smith (@I09@) is after mother died.
 
-Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I02@) occurs after her divorce date.
+Line 68 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
 
-Line 12 (ERROR)	US07: Jane Smith/Doe (@I02@) is over 150 years old.
+Line 50 (ERROR)	US09: Birth date of John Smith (@I07@) is after mother died.
 
-Line 34 (ERROR)	US05: Marriage date of Betty Smith/Boop (@I05@) occurs after her death date.
-
-Line 34 (ERROR)	US03: Birth date of Betty Smith/Boop (@I05@) occurs after her death date.
-
-Line 42 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I06@) occurs after her death date.
+Line 56 (ERROR)	US09: Birth date of Becky Smith (@I08@) is after mother died.
 
 Line 90 (ERROR)	US22: @F02@ is repeated on line 83 and 90.
 
@@ -40,23 +36,7 @@ Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I02@) occurs after her d
 
 Line 12 (ERROR)	US07: Jane Smith/Doe (@I02@) is over 150 years old.
 
-Line 34 (ERROR)	US05: Marriage date of Betty Smith/Boop (@I05@) occurs after her death date.
-
-Line 34 (ERROR)	US03: Birth date of Betty Smith/Boop (@I05@) occurs after her death date.
-
-Line 42 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I06@) occurs after her death date.
-
-Line 28 (ERROR)	US08: Birth date of Janet Smith (@I04@) is not before parents marriage.
-
-Line 90 (ERROR)	US22: @F02@ is repeated on line 83 and 90.
-
-Line 90 (INFO)	US22: @F02@ at line 90 has been changed to @F02@_90 to maintain unique IDs.
-
-Line 4 (ERROR)	US04: Marriage date of John Smith (@I01@) occurs after his divorce date.
-
-Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I02@) occurs after her divorce date.
-
-Line 12 (ERROR)	US07: Jane Smith/Doe (@I02@) is over 150 years old.
+Line 20 (ERROR)	US02: Birth date of Johnny Smith (@I03@) occurs after his marriage date.
 
 Line 34 (ERROR)	US05: Marriage date of Betty Smith/Boop (@I05@) occurs after her death date.
 
@@ -67,4 +47,76 @@ Line 42 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I06@) occurs after he
 Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I03@) is after parents divorce.
 
 Line 28 (ERROR)	US08: Birth date of Janet Smith (@I04@) is before parents marriage.
+
+Line 62 (ERROR)	US09: Birth date of Mary Smith (@I09@) is after mother died.
+
+Line 68 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
+
+Line 50 (ERROR)	US09: Birth date of John Smith (@I07@) is after mother died.
+
+Line 56 (ERROR)	US09: Birth date of Becky Smith (@I08@) is after mother died.
+
+Line 90 (ERROR)	US22: @F02@ is repeated on line 83 and 90.
+
+Line 90 (INFO)	US22: @F02@ at line 90 has been changed to @F02@_90 to maintain unique IDs.
+
+Line 4 (ERROR)	US04: Marriage date of John Smith (@I01@) occurs after his divorce date.
+
+Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I02@) occurs after her divorce date.
+
+Line 12 (ERROR)	US07: Jane Smith/Doe (@I02@) is over 150 years old.
+
+Line 20 (ERROR)	US02: Birth date of Johnny Smith (@I03@) occurs after his marriage date.
+
+Line 34 (ERROR)	US05: Marriage date of Betty Smith/Boop (@I05@) occurs after her death date.
+
+Line 34 (ERROR)	US03: Birth date of Betty Smith/Boop (@I05@) occurs after her death date.
+
+Line 42 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I06@) occurs after her death date.
+
+Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I03@) is after parents divorce.
+
+Line 28 (ERROR)	US08: Birth date of Janet Smith (@I04@) is before parents marriage.
+
+Line 62 (ERROR)	US09: Birth date of Mary Smith (@I09@) is after mother died.
+
+Line 68 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
+
+Line 50 (ERROR)	US09: Birth date of John Smith (@I07@) is after mother died.
+
+Line 56 (ERROR)	US09: Birth date of Becky Smith (@I08@) is after mother died.
+
+Line 90 (ERROR)	US22: @F02@ is repeated on line 83 and 90.
+
+Line 90 (INFO)	US22: @F02@ at line 90 has been changed to @F02@_90 to maintain unique IDs.
+
+Line 4 (ERROR)	US04: Marriage date of John Smith (@I01@) occurs after his divorce date.
+
+Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I02@) occurs after her divorce date.
+
+Line 12 (ERROR)	US07: Jane Smith/Doe (@I02@) is over 150 years old.
+
+Line 20 (ERROR)	US02: Birth date of Johnny Smith (@I03@) occurs after his marriage date.
+
+Line 34 (ERROR)	US05: Marriage date of Betty Smith/Boop (@I05@) occurs after her death date.
+
+Line 34 (ERROR)	US03: Birth date of Betty Smith/Boop (@I05@) occurs after her death date.
+
+Line 42 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I06@) occurs after her death date.
+
+Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I03@) is after parents divorce.
+
+Line 28 (ERROR)	US08: Birth date of Janet Smith (@I04@) is before parents marriage.
+
+Line 20 (ERROR)	US09: Birth date of Johnny Smith (@I03@) is after mother died.
+
+Line 20 (ERROR)	US09: Birth date of Johnny Smith (@I03@) is greater than 9 months after father died.
+
+Line 62 (ERROR)	US09: Birth date of Mary Smith (@I09@) is after mother died.
+
+Line 68 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
+
+Line 50 (ERROR)	US09: Birth date of John Smith (@I07@) is after mother died.
+
+Line 56 (ERROR)	US09: Birth date of Becky Smith (@I08@) is after mother died.
 

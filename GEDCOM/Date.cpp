@@ -220,6 +220,26 @@ bool Date::occursAfter(Date target)
 	return retVal;
 }
 
+void Date::AddMonths(int number)
+{
+	if(month + number > 12)
+	{
+		year++;
+		month = month + number - 12;
+	}
+	else if(month + number < 1)
+	{
+		year--;
+		month = 12 + month + number;
+	}
+	else
+	{
+		month += number;
+	}
+
+	buildFormattedDate();
+}
+
 bool Date::operator==(const Date & d1) const
 {
 	if (this->year == d1.year 
@@ -254,6 +274,7 @@ bool Date::operator>(const Date & d1) const
 
 	return retVal;
 }
+
 bool Date::operator<(const Date & d1) const
 {
 	bool retVal = false;

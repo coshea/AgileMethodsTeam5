@@ -170,6 +170,9 @@ void GEDCOMManager::errorCheck(string fileName)
 
 		//US08
 		ChildsBirthBeforeMarriageAndDivorce(fileName, i->second);
+
+		//US09
+		ChildsBirthBeforeParentsDeath(fileName, i->second);
 		
 	}
 }

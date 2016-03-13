@@ -236,11 +236,11 @@ void ChildsBirthBeforeMarriageAndDivorce(string fileName, Family & f)
 	{
 		Individual child = manager->lookupIndividual(Id);
 		Date childBorn = child.getBirth();
+		int lineNum = child.getLineNumber();
+		string name = child.getName();
 
 		if (childBorn < married)
 		{
-			int lineNum = child.getLineNumber();
-			string name = child.getName();
 			errorLog(LogLevel::ERROR, lineNum) <<
 				"US08: Birth date of " << name <<
 				" (" << Id << ") is before parents marriage."<< "\n";
@@ -248,11 +248,53 @@ void ChildsBirthBeforeMarriageAndDivorce(string fileName, Family & f)
 
 		if (childBorn > divorced)
 		{
-			int lineNum = child.getLineNumber();
-			string name = child.getName();
 			errorLog(LogLevel::ERROR, lineNum) <<
 				"US08: Birth date of " << name <<
 				" (" << Id << ") is after parents divorce." << "\n";
+		}
+	}
+
+}
+
+//US09
+//Child should be born before death of mother 
+//and before 9 months after death of father
+void ChildsBirthBeforeParentsDeath(string fileName, Family & f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	vector<string> children = f.getChildren();
+	string motherId = f.getWife();
+	string fatherId = f.getHusband();
+
+	Individual mother = manager->lookupIndividual(motherId);
+	Individual father = manager->lookupIndividual(fatherId);
+
+	for each (string Id in children)
+	{
+		Individual child = manager->lookupIndividual(Id);
+		Date childBorn = child.getBirth();
+		Date conception = child.getBirth();
+		conception.AddMonths(-9);
+
+		int lineNum = child.getLineNumber();
+		string name = child.getName();
+
+		//Child should be born before death of mother 
+		if (childBorn > mother.getDeath())
+		{
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US09: Birth date of " << name <<
+				" (" << Id << ") is after mother died." << "\n";
+		}
+		
+		//and before 9 months after death of father
+		if (conception > father.getDeath())
+		{
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US09: Birth date of " << name <<
+				" (" << Id << ") is greater than 9 months after father died." << "\n";
 		}
 	}
 

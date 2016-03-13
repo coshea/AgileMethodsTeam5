@@ -91,6 +91,32 @@ namespace UnitTests
 		}
 
 
+		TEST_METHOD(TestAddMonths_Positive)
+		{
+			Date startDate(20, 9, 2017);
+			Date expectedDate(20, 2, 2018);
+			int monthsAdded = 5;
+
+			startDate.AddMonths(monthsAdded);
+			
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddMonths_Negative)
+		{
+			Date startDate(20, 1, 2017);
+			Date expectedDate(20, 11, 2016);
+			int monthsAdded = -2;
+
+			startDate.AddMonths(monthsAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
 
 	};
 }
