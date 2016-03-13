@@ -11,6 +11,7 @@
 #include <fstream>
 #include "Individual.h"
 #include "Logger.h"
+#include "Errors.h"
 
 // US03 - check that birth occurs before death
 void BirthBeforeDeath(string fileName, string first, Individual &i)
@@ -190,7 +191,7 @@ void CorrectGender(string fileName, string familyID)
 	fam = manager->lookupFamily(familyID);
 	husband = manager->lookupIndividual(fam.getHusband());
 	wife = manager->lookupIndividual(fam.getWife());
-
+	vector<string> children = fam.getChildren();
 	if (husband.getSex() != "M")
 	{
 		errorLog(LogLevel::ERROR, husband.getLineNumber()) <<
@@ -218,4 +219,28 @@ string CorrectRepeatedID(string id, int currentLineNum, int firstLineNum, string
 		" has been changed to " << newID << " to maintain unique IDs.\n";
 
 	return newID;
+}
+
+//US08
+void ChildsBirthBeforeMarriage(string fileName, Family & f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	vector<string> children = f.getChildren();
+	Date married = f.getMarried();
+
+	for each (string Id in children)
+	{
+		Individual child = manager->lookupIndividual(Id);
+		Date childBorn = child.getBirth();
+
+		if (childBorn > married || childBorn == married)
+			bool test = true;
+	}
+
+}
+
+//US08
+void ChildsBirthBeforeMarriage(string fileName, Individual& i)
+{
+
 }

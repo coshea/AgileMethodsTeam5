@@ -167,5 +167,17 @@ void GEDCOMManager::errorCheck(string fileName)
 	{
 		//US21
 		CorrectGender(fileName, i->first);
+
+		// Children Errors
+		vector<string> children = i->second.getChildren();
+		for each (string child in children)
+		{
+			//US08
+			ChildsBirthBeforeMarriage(fileName, lookupIndividual(child));
+
+		}
+		//US08
+		ChildsBirthBeforeMarriage(fileName, i->second);
+		
 	}
 }

@@ -16,5 +16,6 @@ void DivorceBeforeDeath(string fileName, string first, Individual &i, Family &f)
 void IsDateValid(string fileName, string first, Individual &i);
 void CorrectGender(string fileName, string familyID);
 string CorrectRepeatedID(string id, int currentLineNum, int firstLineNum, string fileName);
-
+void ChildsBirthBeforeMarriage(string fileName, Family &f);
+void ChildsBirthBeforeMarriage(string fileName, Individual &i);
 #endif /* Errors_h */

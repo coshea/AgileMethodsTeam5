@@ -172,6 +172,13 @@ int main(int argc, const char * argv[])
 			{
 				levelOneTAG = "DIV";
 			}
+			else if (level == 1 && tag == "CHIL")
+			{
+				// Add Child
+				levelOneTAG = "CHIL";
+				f.addChild(tokenizedLine[2]);
+				manager->addFamily(levelZeroID, f);
+			}
 			else if (level == 2 && tokenizedLine[1] == "DATE")
 			{
 				Date d(tokenizedLine[2], tokenizedLine[3], tokenizedLine[4]);
