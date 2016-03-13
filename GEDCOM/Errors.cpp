@@ -222,25 +222,38 @@ string CorrectRepeatedID(string id, int currentLineNum, int firstLineNum, string
 }
 
 //US08
-void ChildsBirthBeforeMarriage(string fileName, Family & f)
+//Child should be born after marriage of parents (and before their divorce)
+void ChildsBirthBeforeMarriageAndDivorce(string fileName, Family & f)
 {
 	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
 	vector<string> children = f.getChildren();
 	Date married = f.getMarried();
+	Date divorced = f.getDivorced();
 
 	for each (string Id in children)
 	{
 		Individual child = manager->lookupIndividual(Id);
 		Date childBorn = child.getBirth();
 
-		if (childBorn > married || childBorn == married)
-			bool test = true;
+		if (childBorn < married)
+		{
+			int lineNum = child.getLineNumber();
+			string name = child.getName();
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US08: Birth date of " << name <<
+				" (" << Id << ") is before parents marriage."<< "\n";
+		}
+
+		if (childBorn > divorced)
+		{
+			int lineNum = child.getLineNumber();
+			string name = child.getName();
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US08: Birth date of " << name <<
+				" (" << Id << ") is after parents divorce." << "\n";
+		}
 	}
-
-}
-
-//US08
-void ChildsBirthBeforeMarriage(string fileName, Individual& i)
-{
 
 }
