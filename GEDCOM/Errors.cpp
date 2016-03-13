@@ -253,7 +253,6 @@ void ChildsBirthBeforeMarriageAndDivorce(string fileName, Family & f)
 				" (" << Id << ") is after parents divorce." << "\n";
 		}
 	}
-
 }
 
 //US09
