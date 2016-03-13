@@ -53,6 +53,9 @@ public:
 
 	bool occursAfter(Date target);
 
+	bool operator==(const Date& d1) const;
+	bool operator>(const Date& d1) const;
+	bool operator<(const Date& d1) const;
 private:
     int month;
     int day;

@@ -219,3 +219,65 @@ bool Date::occursAfter(Date target)
 
 	return retVal;
 }
+
+bool Date::operator==(const Date & d1) const
+{
+	if (this->year == d1.year 
+		&& this->month == d1.month 
+		&& this->day == d1.day)
+		return true;
+	return false;
+}
+
+bool Date::operator>(const Date & d1) const
+{
+	bool retVal = false;
+
+	if (d1.year == 0)
+		return retVal;
+
+	if (d1.year < this->year)
+	{
+		retVal = true;
+	}
+	else if ((d1.year == this->year) &&
+		(d1.month < this->month))
+	{
+		retVal = true;
+	}
+	else if ((d1.year == this->year) &&
+		(d1.month == this->month) &&
+		(d1.day < this->day))
+	{
+		retVal = true;
+	}
+
+	return retVal;
+}
+bool Date::operator<(const Date & d1) const
+{
+	bool retVal = false;
+
+	if (d1.year == 0)
+		return retVal;
+
+	if (d1.year > this->year)
+	{
+		retVal = true;
+	}
+	else if ((d1.year == this->year) &&
+		(d1.month > this->month))
+	{
+		retVal = true;
+	}
+	else if ((d1.year == this->year) &&
+		(d1.month == this->month) &&
+		(d1.day > this->day))
+	{
+		retVal = true;
+	}
+
+	return retVal;
+}
+
+

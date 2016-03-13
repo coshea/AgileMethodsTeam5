@@ -46,5 +46,51 @@ namespace UnitTests
 			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
 		}
 
+		TEST_METHOD(TestEqualTo_True)
+		{
+			Date date1(20, 1, 2017);
+			Date date2(20, 1, 2017);
+			
+			bool expectedValue = true;
+			bool actualValue = date1 == date2;
+			
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestEqualTo_False)
+		{
+			Date date1(20, 1, 2017);
+			Date date2(21, 2, 2016);
+
+			bool expectedValue = false;
+			bool actualValue = date1 == date2;
+
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestLessThan_True)
+		{
+			Date date1(20, 1, 2016);
+			Date date2(20, 1, 2017);
+
+			bool expectedValue = true;
+			bool actualValue = date1 < date2;
+
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestGreaterThan_True)
+		{
+			Date date1(20, 1, 2017);
+			Date date2(21, 2, 2016);
+
+			bool expectedValue = true;
+			bool actualValue = date1 > date2;
+
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+
+
 	};
 }
