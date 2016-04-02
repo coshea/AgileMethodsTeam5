@@ -156,15 +156,8 @@ bool Date::isDateValid()
 		if (day > 29)
 			return false;
 
-		if (day == 29)
-		{
-			if (year % 4 != 0)
-				return false;
-			if (year % 400 == 0)
-				return true;
-			if (year % 100 == 0)
-				return false;
-		}
+		if (day == 29 && !isLeapYear())
+			return false;
 	}
 	return true;
 };
@@ -218,6 +211,16 @@ bool Date::occursAfter(Date target)
 	}
 
 	return retVal;
+}
+
+bool Date::isLeapYear()
+{
+	if (year % 4 != 0)
+		return false;
+	if (year % 400 == 0)
+		return true;
+	if (year % 100 == 0)
+		return false;
 }
 
 void Date::AddMonths(int number)

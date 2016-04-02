@@ -52,7 +52,13 @@ public:
 	bool isDateValid();
 
 	bool occursAfter(Date target);
+
+	bool isLeapYear();
+
 	void AddMonths(int number);
+
+
+
 	bool operator==(const Date& d1) const;
 	bool operator>(const Date& d1) const;
 	bool operator<(const Date& d1) const;
