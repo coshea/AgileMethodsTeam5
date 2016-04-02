@@ -415,15 +415,3 @@ void SiblingSpacing(string fileName, Family & f)
 	}
 
 }
-
-bool SiblingCompare(string id1, string id2)
-{
-	GEDCOMManager * manager = GEDCOMManager::Instance();
-	Individual child1 = manager->lookupIndividual(id1);
-	Individual child2 = manager->lookupIndividual(id2);
-
-	Date child1Born = child1.getBirth();
-	Date child2Born = child2.getBirth();
-
-	return true;
-}
