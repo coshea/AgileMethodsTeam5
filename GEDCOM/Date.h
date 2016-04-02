@@ -28,17 +28,11 @@ public:
 
 	// contructor
 	Date(string d, string m, string y);
-    
-    void setMonth(int m);
-    
+        
     int getMonth();
-    
-    void setDay(int d);
-    
+        
     int getDay();
-    
-    void setYear(int y);
-    
+        
     int getYear();
     
     string toString();
@@ -57,7 +51,7 @@ public:
 
 	void AddMonths(int number);
 
-
+	void AddYears(int number);
 
 	bool operator==(const Date& d1) const;
 	bool operator>(const Date& d1) const;

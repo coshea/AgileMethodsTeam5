@@ -128,6 +128,9 @@ void DivorceBeforeDeath(string fileName, string first, Individual &i, Family &f)
 	}
 }
 
+//US42 - Reject illegitimate dates
+//US01 - Dates before current date
+//US07 - Less then 150 years old
 void IsDateValid(string fileName, string first, Individual &i)
 {
 	Logger errorLog(fileName);
@@ -180,7 +183,8 @@ void IsDateValid(string fileName, string first, Individual &i)
 	}
 }
 
-// US21
+// US21 - Correct gender for role
+//Husband in family should be male and wife in family should be female
 void CorrectGender(string fileName, string familyID)
 {
 	Family fam;
@@ -205,7 +209,8 @@ void CorrectGender(string fileName, string familyID)
 	}
 }
 
-//US 22
+//US 22 - Unique IDs
+//All individual IDs should be unique and all family IDs should be unique
 string CorrectRepeatedID(string id, int currentLineNum, int firstLineNum, string fileName)
 {
 	Logger errorLog(fileName);
@@ -221,7 +226,7 @@ string CorrectRepeatedID(string id, int currentLineNum, int firstLineNum, string
 	return newID;
 }
 
-//US08
+//US08 - Birth before marriage of parents
 //Child should be born after marriage of parents (and before their divorce)
 void ChildsBirthBeforeMarriageAndDivorce(string fileName, Family & f)
 {
@@ -297,4 +302,55 @@ void ChildsBirthBeforeParentsDeath(string fileName, Family & f)
 		}
 	}
 
+}
+
+//US12 - Parents not too old
+//Mother should be less than 60 years older than her children 
+//Father should be less than 80 years older than his children
+void ParentsNotTooOld(string fileName, Family & f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	vector<string> children = f.getChildren();
+	string motherId = f.getWife();
+	string fatherId = f.getHusband();
+
+	Individual mother = manager->lookupIndividual(motherId);
+	Individual father = manager->lookupIndividual(fatherId);
+	Date acceptableChildDateForMother = mother.getBirth();
+	Date acceptableChildDateForFather = father.getBirth();
+
+	// Calculate max acceptable dates for child to be born
+	acceptableChildDateForMother.AddYears(60);
+	acceptableChildDateForFather.AddYears(80);
+
+	string motherName = mother.getName();
+	string fatherName = father.getName();
+
+	for each (string Id in children)
+	{
+		Individual child = manager->lookupIndividual(Id);
+		Date childBorn = child.getBirth();
+		int lineNum = child.getLineNumber();
+		string childName = child.getName();
+
+		//Child should be born before acceptable date for mother
+		if (childBorn > acceptableChildDateForMother)
+		{
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US12: " << motherName << " (" << Id 
+				<< ") is over 60 years older than child "
+				<< childName << " (" << Id << " )\n";
+		}
+
+		//Child should be born before acceptable date for father
+		if (childBorn > acceptableChildDateForFather)
+		{
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US12: " << fatherName << " (" << Id
+				<< ") is over 80 years older than child "
+				<< childName << " (" << Id << " )\n";
+		}
+	}
 }

@@ -117,6 +117,58 @@ namespace UnitTests
 			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
 		}
 
+		TEST_METHOD(TestAddYears_Positive)
+		{
+			Date startDate(20, 9, 2017);
+			Date expectedDate(20, 9, 2022);
+			int yearsAdded = 5;
+
+			startDate.AddYears(yearsAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddYears_Negative)
+		{
+			Date startDate(20, 1, 2017);
+			Date expectedDate(20, 1, 2015);
+			int yearsAdded = -2;
+
+			startDate.AddYears(yearsAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddYears_LeapDay_NewDateNot)
+		{
+			Date startDate(29, 2, 2016);
+			Date expectedDate(1, 3, 2017);
+			int yearsAdded = 1;
+
+			startDate.AddYears(yearsAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddYears_LeapDay_NewDateIs)
+		{
+			Date startDate(29, 2, 2016);
+			Date expectedDate(29, 2, 2020);
+			int yearsAdded = 4;
+
+			startDate.AddYears(yearsAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
 
 	};
 }

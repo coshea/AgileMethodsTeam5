@@ -18,5 +18,6 @@ void CorrectGender(string fileName, string familyID);
 string CorrectRepeatedID(string id, int currentLineNum, int firstLineNum, string fileName);
 void ChildsBirthBeforeMarriageAndDivorce(string fileName, Family &f);
 void ChildsBirthBeforeParentsDeath(string fileName, Family & f);
+void ParentsNotTooOld(string fileName, Family & f);
 
 #endif /* Errors_h */

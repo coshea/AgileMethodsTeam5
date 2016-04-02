@@ -34,30 +34,17 @@ Date::Date(string d, string m, string y)
 	buildFormattedDate();
 };
 
-void Date::setMonth(int m)
-{
-    month = m;
-};
-
 int Date::getMonth()
 {
     return month;
 };
 
-void Date::setDay(int d)
-{
-    day = d;
-};
 
 int Date::getDay()
 {
     return day;
 };
 
-void Date::setYear(int y)
-{
-    year = y;
-};
 
 int Date::getYear()
 {
@@ -238,6 +225,20 @@ void Date::AddMonths(int number)
 	else
 	{
 		month += number;
+	}
+
+	buildFormattedDate();
+}
+
+void Date::AddYears(int number)
+{
+	year += number;
+
+	// Move date to 3/1 if new date is not a leap year but old date was on leap day
+	if(day == 29 && month == 2 && !isLeapYear())
+	{
+		day = 1;
+		month = 3;
 	}
 
 	buildFormattedDate();
