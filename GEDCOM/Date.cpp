@@ -122,9 +122,6 @@ int Date::stringToMonth(string m)
 	return ret;
 };
 
-
-
-
 //US42 Reject illegitimate dates
 //All dates should be legitimate dates for the months specified
 bool Date::isDateValid()
@@ -208,6 +205,7 @@ bool Date::isLeapYear()
 		return true;
 	if (year % 100 == 0)
 		return false;
+	return true;
 }
 
 void Date::AddMonths(int number)
@@ -225,6 +223,19 @@ void Date::AddMonths(int number)
 	else
 	{
 		month += number;
+	}
+
+	// Set new date to end of month if needed
+	if (day == 31 && (month == 4 || month == 6 || month == 9 || month == 11))
+	{
+		day = 30;
+	}
+	else if(month == 2 && day > 28)
+	{
+		if (isLeapYear())
+			day = 29;
+		else
+			day = 28;
 	}
 
 	buildFormattedDate();

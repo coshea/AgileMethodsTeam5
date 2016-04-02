@@ -117,6 +117,32 @@ namespace UnitTests
 			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
 		}
 
+		TEST_METHOD(TestAddMonths_ChangeToEndOfMonth)
+		{
+			Date startDate(31, 1, 2017);
+			Date expectedDate(30, 4, 2017);
+			int monthsAdded = 3;
+
+			startDate.AddMonths(monthsAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddMonths_ChangeToEndOfMonth_LeapYear)
+		{
+			Date startDate(31, 1, 2016);
+			Date expectedDate(29, 2, 2016);
+			int monthsAdded = 1;
+
+			startDate.AddMonths(monthsAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
 		TEST_METHOD(TestAddYears_Positive)
 		{
 			Date startDate(20, 9, 2017);
