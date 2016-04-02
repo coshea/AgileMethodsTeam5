@@ -169,7 +169,7 @@ namespace UnitTests
 			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
 		}
 
-		TEST_METHOD(TestAddYears_LeapDay_NewDateNot)
+		TEST_METHOD(TestAddYears_LeapDay_NewDateNotLeapDay)
 		{
 			Date startDate(29, 2, 2016);
 			Date expectedDate(1, 3, 2017);

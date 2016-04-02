@@ -37,7 +37,7 @@
 1 NAME Janet Smith
 1 SEX F
 1 BIRT
-2 DATE 1 JAN 1964
+2 DATE 4 JAN 1970
 1 FAMC @F1@
 0 @I6@ INDI
 1 NAME Betty Smith/Boop

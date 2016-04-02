@@ -19,5 +19,7 @@ string CorrectRepeatedID(string id, int currentLineNum, int firstLineNum, string
 void ChildsBirthBeforeMarriageAndDivorce(string fileName, Family &f);
 void ChildsBirthBeforeParentsDeath(string fileName, Family & f);
 void ParentsNotTooOld(string fileName, Family & f);
+void SiblingSpacing(string fileName, Family & f);
+bool SiblingCompare(string id1, string id2);
 
 #endif /* Errors_h */

@@ -177,6 +177,9 @@ void GEDCOMManager::errorCheck(string fileName)
 
 		//US12
 		ParentsNotTooOld(fileName, i->second);
+
+		//US13
+		SiblingSpacing(fileName, i->second);
 		
 	}
 }
