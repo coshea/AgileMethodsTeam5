@@ -128,6 +128,32 @@ void DivorceBeforeDeath(string fileName, string first, Individual &i, Family &f)
 	}
 }
 
+// US10	- check that marriage occurs after 14	
+// Marriage should be at least 14 years after birth
+void MarriageBefore14(string fileName, string first, Individual &i, Family &f)
+{
+	Date  birth14th = i.getBirth();
+	birth14th.setYear(birth14th.getYear() + 14);
+	Date  married = f.getMarried();
+	string name = i.getName();
+	string sex = i.getSex();
+	int lineNum = i.getLineNumber();
+
+	if (birth14th.occursAfter(married))
+	{
+		Logger errorLog(fileName);
+		string pronoun = "her";
+
+		if (sex != "F")
+			pronoun = "his";
+
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US10: Marriage date of " << name << " (" << first <<
+			") occurs before " << pronoun << " 14th birthday." << "\n";
+	}
+}
+
+
 void IsDateValid(string fileName, string first, Individual &i)
 {
 	Logger errorLog(fileName);

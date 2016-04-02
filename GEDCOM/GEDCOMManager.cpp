@@ -154,6 +154,8 @@ void GEDCOMManager::errorCheck(string fileName)
 			MarriageBeforeDeath(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));
 			// US06
 			DivorceBeforeDeath(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));
+			// US10
+			MarriageBefore14(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));
 		}
 		// US03
 		BirthBeforeDeath(fileName, i->first, i->second);
