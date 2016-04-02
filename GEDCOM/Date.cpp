@@ -171,6 +171,26 @@ void Date::buildFormattedDate()
 	formmattedTime = mktime(&formattedDate);
 }
 
+int Date::getEndOfMonthDay()
+{
+	switch(month)
+	{
+		case 4: case 6: case 9: case 11:
+			return 30;
+		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+			return 31;
+		case 2:
+		{
+			if (isLeapYear())
+				return 29;
+			else
+				return 28;
+		}
+		default:
+			return 0;
+	}
+}
+
 bool Date::occursAfter(Date target)
 {
 	bool retVal = false;
@@ -206,6 +226,60 @@ bool Date::isLeapYear()
 	if (year % 100 == 0)
 		return false;
 	return true;
+}
+
+void Date::AddDays(int number)
+{
+	if(number > 0)
+	{
+		// If months don't need to change
+		if (number + day <= getEndOfMonthDay())
+		{
+			day += number;
+		}
+		else
+		{
+			while (number != 0)
+			{
+				if (day + 1 > getEndOfMonthDay())
+				{
+					AddMonths(1);
+					day = 1;
+				}
+				else
+				{
+					day++;
+				}
+				number--;
+			}
+		}
+	}
+	else
+	{
+		// If months don't need to change
+		if (number + day > 0)
+		{
+			day += number;
+		}
+		else
+		{
+			while (number != 0)
+			{
+				if (day - 1 == 0)
+				{
+					AddMonths(-1);
+					day = getEndOfMonthDay();
+				}
+				else
+				{
+					day--;
+				}
+				number++;
+			}
+		}
+	}
+	
+	buildFormattedDate();
 }
 
 void Date::AddMonths(int number)

@@ -49,9 +49,13 @@ public:
 
 	bool isLeapYear();
 
+	void AddDays(int number);
+
 	void AddMonths(int number);
 
 	void AddYears(int number);
+
+	int getEndOfMonthDay();
 
 	bool operator==(const Date& d1) const;
 	bool operator>(const Date& d1) const;
