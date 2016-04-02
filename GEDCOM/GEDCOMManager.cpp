@@ -142,6 +142,7 @@ void GEDCOMManager::printFamilies(string fileName)
 
 void GEDCOMManager::errorCheck(string fileName)
 {	
+	// Individual errors
 	for (map<string, Individual>::iterator i = individuals.begin(); i != individuals.end(); ++i)
 	{
 		if (i->second.getFAMS() != "")
@@ -164,7 +165,7 @@ void GEDCOMManager::errorCheck(string fileName)
 		IsDateValid(fileName, i->first, i->second);
 	}
 
-	// Then check for family errors
+	// Family errors
 	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)
 	{
 		//US21
@@ -178,6 +179,9 @@ void GEDCOMManager::errorCheck(string fileName)
 
 		//US12
 		ParentsNotTooOld(fileName, i->second);
+
+		//US13
+		SiblingSpacing(fileName, i->second);
 		
 	}
 }

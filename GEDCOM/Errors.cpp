@@ -12,6 +12,7 @@
 #include "Individual.h"
 #include "Logger.h"
 #include "Errors.h"
+#include <algorithm>
 
 // US03 - check that birth occurs before death
 void BirthBeforeDeath(string fileName, string first, Individual &i)
@@ -378,4 +379,64 @@ void ParentsNotTooOld(string fileName, Family & f)
 				<< childName << " (" << Id << " )\n";
 		}
 	}
+}
+
+//US13 - Siblings spacing
+//Birth dates of siblings should be more than 8 months apart or less than 2 days apart
+void SiblingSpacing(string fileName, Family & f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	vector<string> children = f.getChildren();
+	std::vector<string>::iterator it;
+
+	for (int n = 1; n < children.size(); ++n)
+	{
+		Individual child1 = manager->lookupIndividual(children[n]);
+		Individual child2 = manager->lookupIndividual(children[n-1]);
+
+		Date child1Born = child1.getBirth();
+		Date child2Born = child2.getBirth();
+		
+		Date youngerChild;
+		Date olderChild;
+
+		if(child1Born < child2Born)
+		{
+			youngerChild = child1.getBirth();
+			olderChild = child2.getBirth();
+		}
+		else
+		{
+			youngerChild = child2.getBirth();
+			olderChild = child1.getBirth();
+		}
+
+		Date EightMonthsOlder  = youngerChild;
+		Date TwoDaysOlder = youngerChild;
+		EightMonthsOlder.AddMonths(8);
+		TwoDaysOlder.AddDays(2);
+
+		if (olderChild > EightMonthsOlder || olderChild < TwoDaysOlder)
+		{
+			continue;
+		}
+		
+		int child1lineNum = child1.getLineNumber();
+		string child1Name = child1.getName();
+		int child2lineNum = child2.getLineNumber();
+		string child2Name = child2.getName();
+
+		//Older child is born more than 2 days apart but less than 8 months apart
+		errorLog(LogLevel::ERROR, child1lineNum) <<
+			"US13: Birth dates of " << child1Name <<
+			" (" << children[n] << ") and " << child2Name <<
+			" (" << children[n-1] << ") are more than 2 days apart but less than 8 months apart." << "\n";
+		errorLog(LogLevel::ERROR, child2lineNum) <<
+			"US13: Birth dates of " << child2Name <<
+			" (" << children[n - 1] << ") and " << child1Name <<
+			" (" << children[n] << ") are more than 2 days apart but less than 8 months apart." << "\n";
+	}
+
 }

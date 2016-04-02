@@ -169,7 +169,7 @@ namespace UnitTests
 			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
 		}
 
-		TEST_METHOD(TestAddYears_LeapDay_NewDateNot)
+		TEST_METHOD(TestAddYears_LeapDay_NewDateNotLeapDay)
 		{
 			Date startDate(29, 2, 2016);
 			Date expectedDate(1, 3, 2017);
@@ -182,7 +182,7 @@ namespace UnitTests
 			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
 		}
 
-		TEST_METHOD(TestAddYears_LeapDay_NewDateIs)
+		TEST_METHOD(TestAddYears_LeapDay_NewDateIsLeapDay)
 		{
 			Date startDate(29, 2, 2016);
 			Date expectedDate(29, 2, 2020);
@@ -195,6 +195,119 @@ namespace UnitTests
 			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
 		}
 
+		TEST_METHOD(TestEndOfMonthDay_31)
+		{
+			Date testDate(19, 1, 2016);
+			int expectedValue = 31;
+
+			int actualValue =testDate.getEndOfMonthDay();
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestEndOfMonthDay_30)
+		{
+			Date testDate(19, 4, 2016);
+			int expectedValue = 30;
+
+			int actualValue = testDate.getEndOfMonthDay();
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestEndOfMonthDay_29)
+		{
+			Date testDate(19, 2, 2016);
+			int expectedValue = 29;
+
+			int actualValue = testDate.getEndOfMonthDay();
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestEndOfMonthDay_28)
+		{
+			Date testDate(19, 2, 2017);
+			int expectedValue = 28;
+
+			int actualValue = testDate.getEndOfMonthDay();
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddDays_Positive)
+		{
+			Date startDate(20, 1, 2017);
+			Date expectedDate(22, 1, 2017);
+			int daysAdded = 2;
+
+			startDate.AddDays(daysAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddDays_Positive_AddMonth)
+		{
+			Date startDate(29, 1, 2017);
+			Date expectedDate(3, 2, 2017);
+			int daysAdded = 5;
+
+			startDate.AddDays(daysAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddDays_Positive_AddMonth_AddYear)
+		{
+			Date startDate(29, 12, 2017);
+			Date expectedDate(3, 1, 2018);
+			int daysAdded = 5;
+
+			startDate.AddDays(daysAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddDays_Negative)
+		{
+			Date startDate(22, 1, 2017);
+			Date expectedDate(20, 1, 2017);
+			int daysAdded = -2;
+
+			startDate.AddDays(daysAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddDays_Negative_AddMonth)
+		{
+			Date startDate(3, 2, 2017);
+			Date expectedDate(29, 1, 2017);
+			int daysAdded = -5;
+
+			startDate.AddDays(daysAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestAddDays_Negative_AddMonth_AddYear)
+		{
+			Date startDate(3, 1, 2018);
+			Date expectedDate(29, 12, 2017);
+			int daysAdded = -5;
+
+			startDate.AddDays(daysAdded);
+
+			bool expectedValue = true;
+			bool actualValue = startDate == expectedDate;
+			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+		}
 
 	};
 }
