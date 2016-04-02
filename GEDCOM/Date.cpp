@@ -34,30 +34,17 @@ Date::Date(string d, string m, string y)
 	buildFormattedDate();
 };
 
-void Date::setMonth(int m)
-{
-    month = m;
-};
-
 int Date::getMonth()
 {
     return month;
 };
 
-void Date::setDay(int d)
-{
-    day = d;
-};
 
 int Date::getDay()
 {
     return day;
 };
 
-void Date::setYear(int y)
-{
-    year = y;
-};
 
 int Date::getYear()
 {
@@ -135,9 +122,6 @@ int Date::stringToMonth(string m)
 	return ret;
 };
 
-
-
-
 //US42 Reject illegitimate dates
 //All dates should be legitimate dates for the months specified
 bool Date::isDateValid()
@@ -156,15 +140,8 @@ bool Date::isDateValid()
 		if (day > 29)
 			return false;
 
-		if (day == 29)
-		{
-			if (year % 4 != 0)
-				return false;
-			if (year % 400 == 0)
-				return true;
-			if (year % 100 == 0)
-				return false;
-		}
+		if (day == 29 && !isLeapYear())
+			return false;
 	}
 	return true;
 };
@@ -220,6 +197,17 @@ bool Date::occursAfter(Date target)
 	return retVal;
 }
 
+bool Date::isLeapYear()
+{
+	if (year % 4 != 0)
+		return false;
+	if (year % 400 == 0)
+		return true;
+	if (year % 100 == 0)
+		return false;
+	return true;
+}
+
 void Date::AddMonths(int number)
 {
 	if(month + number > 12)
@@ -235,6 +223,33 @@ void Date::AddMonths(int number)
 	else
 	{
 		month += number;
+	}
+
+	// Set new date to end of month if needed
+	if (day == 31 && (month == 4 || month == 6 || month == 9 || month == 11))
+	{
+		day = 30;
+	}
+	else if(month == 2 && day > 28)
+	{
+		if (isLeapYear())
+			day = 29;
+		else
+			day = 28;
+	}
+
+	buildFormattedDate();
+}
+
+void Date::AddYears(int number)
+{
+	year += number;
+
+	// Move date to 3/1 if new date is not a leap year but old date was on leap day
+	if(day == 29 && month == 2 && !isLeapYear())
+	{
+		day = 1;
+		month = 3;
 	}
 
 	buildFormattedDate();
