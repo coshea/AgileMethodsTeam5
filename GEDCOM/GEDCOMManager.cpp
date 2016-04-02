@@ -175,6 +175,9 @@ void GEDCOMManager::errorCheck(string fileName)
 
 		//US09
 		ChildsBirthBeforeParentsDeath(fileName, i->second);
+
+		//US12
+		ParentsNotTooOld(fileName, i->second);
 		
 	}
 }
