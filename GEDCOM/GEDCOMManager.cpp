@@ -182,6 +182,9 @@ void GEDCOMManager::errorCheck(string fileName)
 
 		//US13
 		SiblingSpacing(fileName, i->second);
+
+		//US14
+		MoreThan5Births(fileName, i->second);
 		
 	}
 }

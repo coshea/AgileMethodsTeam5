@@ -422,31 +422,31 @@ Line 64 (ERROR)	US10: Marriage date of Mary Smith (@I9@) occurs before her 14th 
 
 Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I3@) is after parents divorce.
 
-Line 36 (ERROR)	US08: Birth date of Janet Smith (@I5@) is after parents divorce.
+Line 36 (ERROR)	US08: Birth date of Janet Smith (@I5@) is before parents marriage.
 
 Line 20 (ERROR)	US12: Jane Smith/Doe (@I3@) is over 60 years older than child Johnny Smith (@I3@ )
 
 Line 36 (ERROR)	US12: Jane Smith/Doe (@I5@) is over 60 years older than child Janet Smith (@I5@ )
 
-Line 36 (ERROR)	US13: Birth date of Janet Smith (@I5@) and Johnny Smith (@I3@ is more than 2 days apart but less than 8 months apart.
+Line 64 (ERROR)	US09: Birth date of Mary Smith (@I9@) is after mother died.
 
-Line 63 (ERROR)	US09: Birth date of Mary Smith (@I9@) is after mother died.
+Line 71 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
 
-Line 69 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
-
-Line 75 (ERROR)	US09: Birth date of Kate Smith (@I11@) is after mother died.
+Line 77 (ERROR)	US09: Birth date of Kate Smith (@I11@) is after mother died.
 
 Line 50 (ERROR)	US09: Birth date of John Smith (@I7@) is after mother died.
 
-Line 56 (ERROR)	US09: Birth date of Becky Smith (@I8@) is after mother died.
+Line 57 (ERROR)	US09: Birth date of Becky Smith (@I8@) is after mother died.
 
-Line 110 (ERROR)	US08: Birth date of Larry Johnson (@I16@) is before parents marriage.
+Line 112 (ERROR)	US08: Birth date of Larry Johnson (@I16@) is before parents marriage.
 
-Line 81 (ERROR)	US12: Allison Johnson/Robin (@I12@) is over 60 years older than child Mike Johnson (@I12@ )
+Line 83 (ERROR)	US12: Allison Johnson/Robin (@I12@) is over 60 years older than child Mike Johnson (@I12@ )
 
-Line 110 (ERROR)	US42: Birth date of Larry Johnson (@I16@) is not a valid date.
+Line 83 (ERROR)	US10: Marriage date of Mike Johnson (@I12@) occurs before his 14th birthday.
 
-Line 110 (ERROR)	US07: Larry Johnson (@I16@) is over 150 years old.
+Line 112 (ERROR)	US42: Birth date of Larry Johnson (@I16@) is not a valid date.
+
+Line 112 (ERROR)	US07: Larry Johnson (@I16@) is over 150 years old.
 
 Line 4 (ERROR)	US04: Marriage date of John Smith (@I1@) occurs after his divorce date.
 
@@ -456,31 +456,307 @@ Line 12 (ERROR)	US07: Jane Smith/Doe (@I2@) is over 150 years old.
 
 Line 20 (ERROR)	US02: Birth date of Johnny Smith (@I3@) occurs after his marriage date.
 
+Line 20 (ERROR)	US10: Marriage date of Johnny Smith (@I3@) occurs before his 14th birthday.
+
 Line 28 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I4@) occurs after her death date.
 
 Line 42 (ERROR)	US02: Birth date of Betty Smith/Boop (@I6@) occurs after her marriage date.
 
 Line 42 (ERROR)	US06: Divorce date of Betty Smith/Boop (@I6@) occurs after her death date.
 
+Line 42 (ERROR)	US10: Marriage date of Betty Smith/Boop (@I6@) occurs before her 14th birthday.
+
 Line 42 (ERROR)	US03: Birth date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 57 (ERROR)	US10: Marriage date of Becky Smith (@I8@) occurs before her 14th birthday.
+
+Line 64 (ERROR)	US10: Marriage date of Mary Smith (@I9@) occurs before her 14th birthday.
 
 Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I3@) is after parents divorce.
 
-Line 36 (ERROR)	US08: Birth date of Janet Smith (@I5@) is after parents divorce.
+Line 36 (ERROR)	US08: Birth date of Janet Smith (@I5@) is before parents marriage.
 
 Line 20 (ERROR)	US12: Jane Smith/Doe (@I3@) is over 60 years older than child Johnny Smith (@I3@ )
 
 Line 36 (ERROR)	US12: Jane Smith/Doe (@I5@) is over 60 years older than child Janet Smith (@I5@ )
 
-Line 36 (ERROR)	US13: Birth dates of Janet Smith (@I5@) and Johnny Smith (@I3@) are more than 2 days apart but less than 8 months apart.
-
-Line 20 (ERROR)	US13: Birth dates of Johnny Smith (@I3@) and Janet Smith (@I5@) are more than 2 days apart but less than 8 months apart.
-
-Line 63 (ERROR)	US09: Birth date of Mary Smith (@I9@) is after mother died.
+Line 64 (ERROR)	US09: Birth date of Mary Smith (@I9@) is after mother died.
 
 Line 71 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
 
 Line 77 (ERROR)	US09: Birth date of Kate Smith (@I11@) is after mother died.
+
+Line 50 (ERROR)	US09: Birth date of John Smith (@I7@) is after mother died.
+
+Line 57 (ERROR)	US09: Birth date of Becky Smith (@I8@) is after mother died.
+
+Line 112 (ERROR)	US08: Birth date of Larry Johnson (@I16@) is before parents marriage.
+
+Line 83 (ERROR)	US12: Allison Johnson/Robin (@I12@) is over 60 years older than child Mike Johnson (@I12@ )
+
+Line 83 (ERROR)	US10: Marriage date of Mike Johnson (@I12@) occurs before his 14th birthday.
+
+Line 112 (ERROR)	US42: Birth date of Larry Johnson (@I16@) is not a valid date.
+
+Line 112 (ERROR)	US07: Larry Johnson (@I16@) is over 150 years old.
+
+Line 4 (ERROR)	US04: Marriage date of John Smith (@I1@) occurs after his divorce date.
+
+Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I2@) occurs after her divorce date.
+
+Line 12 (ERROR)	US07: Jane Smith/Doe (@I2@) is over 150 years old.
+
+Line 20 (ERROR)	US02: Birth date of Johnny Smith (@I3@) occurs after his marriage date.
+
+Line 20 (ERROR)	US10: Marriage date of Johnny Smith (@I3@) occurs before his 14th birthday.
+
+Line 28 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I4@) occurs after her death date.
+
+Line 42 (ERROR)	US02: Birth date of Betty Smith/Boop (@I6@) occurs after her marriage date.
+
+Line 42 (ERROR)	US06: Divorce date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 42 (ERROR)	US10: Marriage date of Betty Smith/Boop (@I6@) occurs before her 14th birthday.
+
+Line 42 (ERROR)	US03: Birth date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 57 (ERROR)	US10: Marriage date of Becky Smith (@I8@) occurs before her 14th birthday.
+
+Line 64 (ERROR)	US10: Marriage date of Mary Smith (@I9@) occurs before her 14th birthday.
+
+Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I3@) is after parents divorce.
+
+Line 36 (ERROR)	US08: Birth date of Janet Smith (@I5@) is before parents marriage.
+
+Line 20 (ERROR)	US12: Jane Smith/Doe (@I3@) is over 60 years older than child Johnny Smith (@I3@ )
+
+Line 36 (ERROR)	US12: Jane Smith/Doe (@I5@) is over 60 years older than child Janet Smith (@I5@ )
+
+Line 64 (ERROR)	US09: Birth date of Mary Smith (@I9@) is after mother died.
+
+Line 71 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
+
+Line 77 (ERROR)	US09: Birth date of Kate Smith (@I11@) is after mother died.
+
+Line 50 (ERROR)	US09: Birth date of John Smith (@I7@) is after mother died.
+
+Line 57 (ERROR)	US09: Birth date of Becky Smith (@I8@) is after mother died.
+
+Line 112 (ERROR)	US08: Birth date of Larry Johnson (@I16@) is before parents marriage.
+
+Line 83 (ERROR)	US12: Allison Johnson/Robin (@I12@) is over 60 years older than child Mike Johnson (@I12@ )
+
+Line 83 (ERROR)	US10: Marriage date of Mike Johnson (@I12@) occurs before his 14th birthday.
+
+Line 112 (ERROR)	US42: Birth date of Larry Johnson (@I16@) is not a valid date.
+
+Line 112 (ERROR)	US07: Larry Johnson (@I16@) is over 150 years old.
+
+Line 4 (ERROR)	US04: Marriage date of John Smith (@I1@) occurs after his divorce date.
+
+Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I2@) occurs after her divorce date.
+
+Line 12 (ERROR)	US07: Jane Smith/Doe (@I2@) is over 150 years old.
+
+Line 20 (ERROR)	US02: Birth date of Johnny Smith (@I3@) occurs after his marriage date.
+
+Line 20 (ERROR)	US10: Marriage date of Johnny Smith (@I3@) occurs before his 14th birthday.
+
+Line 28 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I4@) occurs after her death date.
+
+Line 42 (ERROR)	US02: Birth date of Betty Smith/Boop (@I6@) occurs after her marriage date.
+
+Line 42 (ERROR)	US06: Divorce date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 42 (ERROR)	US10: Marriage date of Betty Smith/Boop (@I6@) occurs before her 14th birthday.
+
+Line 42 (ERROR)	US03: Birth date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 57 (ERROR)	US10: Marriage date of Becky Smith (@I8@) occurs before her 14th birthday.
+
+Line 64 (ERROR)	US10: Marriage date of Mary Smith (@I9@) occurs before her 14th birthday.
+
+Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I3@) is after parents divorce.
+
+Line 36 (ERROR)	US08: Birth date of Janet Smith (@I5@) is before parents marriage.
+
+Line 20 (ERROR)	US12: Jane Smith/Doe (@I3@) is over 60 years older than child Johnny Smith (@I3@ )
+
+Line 36 (ERROR)	US12: Jane Smith/Doe (@I5@) is over 60 years older than child Janet Smith (@I5@ )
+
+Line 64 (ERROR)	US09: Birth date of Mary Smith (@I9@) is after mother died.
+
+Line 71 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
+
+Line 77 (ERROR)	US09: Birth date of Kate Smith (@I11@) is after mother died.
+
+Line 50 (ERROR)	US09: Birth date of John Smith (@I7@) is after mother died.
+
+Line 57 (ERROR)	US09: Birth date of Becky Smith (@I8@) is after mother died.
+
+Line 112 (ERROR)	US08: Birth date of Larry Johnson (@I16@) is before parents marriage.
+
+Line 83 (ERROR)	US12: Allison Johnson/Robin (@I12@) is over 60 years older than child Mike Johnson (@I12@ )
+
+Line 83 (ERROR)	US10: Marriage date of Mike Johnson (@I12@) occurs before his 14th birthday.
+
+Line 112 (ERROR)	US42: Birth date of Larry Johnson (@I16@) is not a valid date.
+
+Line 112 (ERROR)	US07: Larry Johnson (@I16@) is over 150 years old.
+
+Line 4 (ERROR)	US04: Marriage date of John Smith (@I1@) occurs after his divorce date.
+
+Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I2@) occurs after her divorce date.
+
+Line 12 (ERROR)	US07: Jane Smith/Doe (@I2@) is over 150 years old.
+
+Line 20 (ERROR)	US02: Birth date of Johnny Smith (@I3@) occurs after his marriage date.
+
+Line 20 (ERROR)	US10: Marriage date of Johnny Smith (@I3@) occurs before his 14th birthday.
+
+Line 28 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I4@) occurs after her death date.
+
+Line 42 (ERROR)	US02: Birth date of Betty Smith/Boop (@I6@) occurs after her marriage date.
+
+Line 42 (ERROR)	US06: Divorce date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 42 (ERROR)	US10: Marriage date of Betty Smith/Boop (@I6@) occurs before her 14th birthday.
+
+Line 42 (ERROR)	US03: Birth date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 57 (ERROR)	US10: Marriage date of Becky Smith (@I8@) occurs before her 14th birthday.
+
+Line 64 (ERROR)	US10: Marriage date of Mary Smith (@I9@) occurs before her 14th birthday.
+
+Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I3@) is after parents divorce.
+
+Line 36 (ERROR)	US08: Birth date of Janet Smith (@I5@) is before parents marriage.
+
+Line 20 (ERROR)	US12: Jane Smith/Doe (@I3@) is over 60 years older than child Johnny Smith (@I3@ )
+
+Line 36 (ERROR)	US12: Jane Smith/Doe (@I5@) is over 60 years older than child Janet Smith (@I5@ )
+
+Line 64 (ERROR)	US09: Birth date of Mary Smith (@I9@) is after mother died.
+
+Line 71 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
+
+Line 77 (ERROR)	US09: Birth date of Kate Smith (@I11@) is after mother died.
+
+Line 50 (ERROR)	US09: Birth date of John Smith (@I7@) is after mother died.
+
+Line 57 (ERROR)	US09: Birth date of Becky Smith (@I8@) is after mother died.
+
+Line 112 (ERROR)	US08: Birth date of Larry Johnson (@I16@) is before parents marriage.
+
+Line 83 (ERROR)	US12: Allison Johnson/Robin (@I12@) is over 60 years older than child Mike Johnson (@I12@ )
+
+Line 83 (ERROR)	US10: Marriage date of Mike Johnson (@I12@) occurs before his 14th birthday.
+
+Line 112 (ERROR)	US42: Birth date of Larry Johnson (@I16@) is not a valid date.
+
+Line 112 (ERROR)	US07: Larry Johnson (@I16@) is over 150 years old.
+
+Line 4 (ERROR)	US04: Marriage date of John Smith (@I1@) occurs after his divorce date.
+
+Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I2@) occurs after her divorce date.
+
+Line 12 (ERROR)	US07: Jane Smith/Doe (@I2@) is over 150 years old.
+
+Line 20 (ERROR)	US02: Birth date of Johnny Smith (@I3@) occurs after his marriage date.
+
+Line 20 (ERROR)	US10: Marriage date of Johnny Smith (@I3@) occurs before his 14th birthday.
+
+Line 28 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I4@) occurs after her death date.
+
+Line 42 (ERROR)	US02: Birth date of Betty Smith/Boop (@I6@) occurs after her marriage date.
+
+Line 42 (ERROR)	US06: Divorce date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 42 (ERROR)	US10: Marriage date of Betty Smith/Boop (@I6@) occurs before her 14th birthday.
+
+Line 42 (ERROR)	US03: Birth date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 57 (ERROR)	US10: Marriage date of Becky Smith (@I8@) occurs before her 14th birthday.
+
+Line 64 (ERROR)	US10: Marriage date of Mary Smith (@I9@) occurs before her 14th birthday.
+
+Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I3@) is after parents divorce.
+
+Line 36 (ERROR)	US08: Birth date of Janet Smith (@I5@) is before parents marriage.
+
+Line 20 (ERROR)	US12: Jane Smith/Doe (@I3@) is over 60 years older than child Johnny Smith (@I3@ )
+
+Line 36 (ERROR)	US12: Jane Smith/Doe (@I5@) is over 60 years older than child Janet Smith (@I5@ )
+
+Line 64 (ERROR)	US09: Birth date of Mary Smith (@I9@) is after mother died.
+
+Line 71 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
+
+Line 77 (ERROR)	US09: Birth date of Kate Smith (@I11@) is after mother died.
+
+Line 50 (ERROR)	US09: Birth date of John Smith (@I7@) is after mother died.
+
+Line 57 (ERROR)	US09: Birth date of Becky Smith (@I8@) is after mother died.
+
+Line 112 (ERROR)	US08: Birth date of Larry Johnson (@I16@) is before parents marriage.
+
+Line 83 (ERROR)	US12: Allison Johnson/Robin (@I12@) is over 60 years older than child Mike Johnson (@I12@ )
+
+Line 83 (ERROR)	US10: Marriage date of Mike Johnson (@I12@) occurs before his 14th birthday.
+
+Line 112 (ERROR)	US42: Birth date of Larry Johnson (@I16@) is not a valid date.
+
+Line 112 (ERROR)	US07: Larry Johnson (@I16@) is over 150 years old.
+
+Line 4 (ERROR)	US04: Marriage date of John Smith (@I1@) occurs after his divorce date.
+
+Line 12 (ERROR)	US04: Marriage date of Jane Smith/Doe (@I2@) occurs after her divorce date.
+
+Line 12 (ERROR)	US07: Jane Smith/Doe (@I2@) is over 150 years old.
+
+Line 20 (ERROR)	US02: Birth date of Johnny Smith (@I3@) occurs after his marriage date.
+
+Line 20 (ERROR)	US10: Marriage date of Johnny Smith (@I3@) occurs before his 14th birthday.
+
+Line 28 (ERROR)	US05: Marriage date of Maria Smith/Lopez (@I4@) occurs after her death date.
+
+Line 42 (ERROR)	US02: Birth date of Betty Smith/Boop (@I6@) occurs after her marriage date.
+
+Line 42 (ERROR)	US06: Divorce date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 42 (ERROR)	US10: Marriage date of Betty Smith/Boop (@I6@) occurs before her 14th birthday.
+
+Line 42 (ERROR)	US03: Birth date of Betty Smith/Boop (@I6@) occurs after her death date.
+
+Line 57 (ERROR)	US10: Marriage date of Becky Smith (@I8@) occurs before her 14th birthday.
+
+Line 64 (ERROR)	US10: Marriage date of Mary Smith (@I9@) occurs before her 14th birthday.
+
+Line 20 (ERROR)	US08: Birth date of Johnny Smith (@I3@) is after parents divorce.
+
+Line 36 (ERROR)	US08: Birth date of Janet Smith (@I5@) is before parents marriage.
+
+Line 20 (ERROR)	US12: Jane Smith/Doe (@I3@) is over 60 years older than child Johnny Smith (@I3@ )
+
+Line 36 (ERROR)	US12: Jane Smith/Doe (@I5@) is over 60 years older than child Janet Smith (@I5@ )
+
+Line 64 (ERROR)	US09: Birth date of Mary Smith (@I9@) is after mother died.
+
+Line 71 (ERROR)	US09: Birth date of Mark Smith (@I10@) is after mother died.
+
+Line 77 (ERROR)	US09: Birth date of Kate Smith (@I11@) is after mother died.
+
+Line 116 (ERROR)	US09: Birth date of Mason Smith (@I17@) is after mother died.
+
+Line 122 (ERROR)	US09: Birth date of Mike Smith (@I18@) is after mother died.
+
+Line 128 (ERROR)	US09: Birth date of Matt Smith (@I19@) is after mother died.
+
+Line 134 (ERROR)	US09: Birth date of Marty Smith (@I20@) is after mother died.
+
+Line 140 (ERROR)	US09: Birth date of Marco Smith (@I21@) is after mother died.
+
+Line 28 (ERROR)	US14: Maria Smith/Lopez (@I4@) had multiple births more than 5.
 
 Line 50 (ERROR)	US09: Birth date of John Smith (@I7@) is after mother died.
 

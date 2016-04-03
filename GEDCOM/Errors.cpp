@@ -391,7 +391,7 @@ void SiblingSpacing(string fileName, Family & f)
 	vector<string> children = f.getChildren();
 	std::vector<string>::iterator it;
 
-	for (int n = 1; n < children.size(); ++n)
+	for (size_t n = 1; n < children.size(); ++n)
 	{
 		Individual child1 = manager->lookupIndividual(children[n]);
 		Individual child2 = manager->lookupIndividual(children[n-1]);
@@ -439,4 +439,51 @@ void SiblingSpacing(string fileName, Family & f)
 			" (" << children[n] << ") are more than 2 days apart but less than 8 months apart." << "\n";
 	}
 
+}
+
+//US14 - Multiple births 5 or less
+//No more than five siblings should be born at the same time
+void MoreThan5Births(string fileName, Family & f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	vector<string> children = f.getChildren();
+
+	// check if there are more than 5 children
+	if (children.size() > 5)
+	{
+		Individual child;
+		Date checkBirth;
+		Date childBorn;
+		int count = 0;
+		bool error = false;
+
+		for each (string Id in children)
+		{
+			child = manager->lookupIndividual(Id);
+			checkBirth = child.getBirth();
+			count = 0;
+			for each (string Id in children)
+			{
+				child = manager->lookupIndividual(Id);
+				childBorn = child.getBirth();
+				if (checkBirth == childBorn)
+					count++;
+			}
+			if (count > 5)
+				error = true;
+		}
+		if (error)
+		{
+			string motherId = f.getWife();
+			Individual mother = manager->lookupIndividual(motherId);
+			int lineNum = mother.getLineNumber();
+			string motherName = mother.getName();
+
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US14: " << motherName << " (" << motherId <<
+				") had multiple births more than 5.\n";
+		}
+	}
 }
