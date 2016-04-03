@@ -15,6 +15,9 @@ GEDCOMManager* GEDCOMManager::m_pInstance = NULL;
 static map<string, Individual> individuals;
 static map<string, Family> families;
 
+// Husband/Wife ID, Married Date, Divorce Date
+static map< string, vector<pair<Date, Date>>> myMarriage;
+
 GEDCOMManager* GEDCOMManager::Instance()
 {
     if (!m_pInstance)   // Only allow one instance of class to be generated.
@@ -153,7 +156,7 @@ void GEDCOMManager::printOrphans(string fileName)
 		if (lookupIndividual(wife).isDead() && lookupIndividual(husband).isDead())
 		{
 			vector<string> children = i->second.getChildren();
-			for (int x = 0; x < children.size(); x++)
+			for (size_t x = 0; x < children.size(); x++)
 			{
 				if (lookupIndividual(children[x]).getAge() < 18)
 				{
@@ -228,6 +231,39 @@ void GEDCOMManager::printFamilies(string fileName)
     familyStream.close();
 }
 
+void GEDCOMManager::buildIndividualMarriages(void)
+{
+	for (map<string, Family>::iterator f = families.begin(); f != families.end(); ++f)
+	{
+		    // map the Husbands
+		    if (myMarriage.find(f->second.getHusband()) == myMarriage.end())
+			{
+				vector<pair<Date, Date>> mDates;
+				mDates.push_back(make_pair(f->second.getMarried(),f->second.getDivorced()));
+				myMarriage[f->second.getHusband()] = mDates;
+			}
+			else
+			{
+				vector<pair<Date, Date>> mDates(myMarriage[f->second.getHusband()]);
+				mDates.push_back(make_pair(f->second.getMarried(), f->second.getDivorced()));
+				myMarriage[f->second.getHusband()] = mDates;
+			}
+
+			// map the Wives
+			if (myMarriage.find(f->second.getWife()) == myMarriage.end())
+			{
+				vector<pair<Date, Date>> mDates;
+				mDates.push_back(make_pair(f->second.getMarried(), f->second.getDivorced()));
+				myMarriage[f->second.getWife()] = mDates;
+			}
+			else
+			{
+				vector<pair<Date, Date>> mDates(myMarriage[f->second.getWife()]);
+				mDates.push_back(make_pair(f->second.getMarried(), f->second.getDivorced()));
+				myMarriage[f->second.getWife()] = mDates;
+			}
+	}
+}
 
 void GEDCOMManager::errorCheck(string fileName)
 {	
@@ -245,7 +281,7 @@ void GEDCOMManager::errorCheck(string fileName)
 			// US06
 			DivorceBeforeDeath(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));
 			// US10
-			MarriageBefore14(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));
+			MarriageBefore14(fileName, i->first, i->second, lookupFamily(i->second.getFAMS()));			
 		}
 		// US03
 		BirthBeforeDeath(fileName, i->first, i->second);
@@ -273,7 +309,13 @@ void GEDCOMManager::errorCheck(string fileName)
 		SiblingSpacing(fileName, i->second);
 
 		//US14
-		MoreThan5Births(fileName, i->second);
-		
+		MoreThan5Births(fileName, i->second);		
+	}
+
+	// Marriage errors
+	for (map< string, vector<pair<Date, Date>>>::iterator m = myMarriage.begin(); m != myMarriage.end(); m++)
+	{
+		//US11
+		NoBigamy(fileName, m->first, m->second);
 	}
 }

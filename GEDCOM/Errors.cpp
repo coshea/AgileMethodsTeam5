@@ -154,6 +154,68 @@ void MarriageBefore14(string fileName, string first, Individual &i, Family &f)
 	}
 }
 
+// US11	- No Bigamy
+// Marriage should not occur during marriage to another spouse
+void NoBigamy(string fileName, string id, vector<pair<Date, Date>> m)
+{
+	if (m.size() > 1)
+	{ // there was more than one marriage
+		bool error = false;
+		Logger errorLog(fileName);
+		GEDCOMManager * manager = GEDCOMManager::Instance();
+		// check for overlaps
+		for (vector<pair<Date, Date>>::iterator one = m.begin(); one != m.end(); ++one)
+		{
+			for (vector<pair<Date, Date>>::iterator two = m.begin(); two != m.end(); ++two)
+			{
+				if (one != two) // don't check the same
+				{
+					if ((!one->second.isDateValid()) && // no divorce
+						(!two->second.isDateValid()))
+					{
+						error = true;
+					}
+
+					// compare the marriage dates
+					if (one->first > two->first)  // greater than is 2000 > 1969					
+					{
+						if (!two->second.isDateValid())  // older marriage no divorce
+						{
+							error = true;
+						}
+						else if (two->second > one->first)  // divorce after new marriage
+						{
+							error = true;
+						}
+					}
+					else // less than or equal					
+					{
+						if (!one->second.isDateValid())  // older marriage no divorce
+						{
+							error = true;
+						}
+						else if (one->second > two->first)  // divorce after new marriage
+						{
+							error = true;
+						}
+					}
+				}
+			}
+		}
+		if (error)
+		{
+			Individual person = manager->lookupIndividual(id);
+			int lineNum = person.getLineNumber();
+			string name = person.getName();
+
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US11: Marriage of " << name << " (" << id <<
+				") resulted in Bigamy." << "\n";
+		}
+	}
+	
+}
+
 //US42 - Reject illegitimate dates
 //US01 - Dates before current date
 //US07 - Less then 150 years old

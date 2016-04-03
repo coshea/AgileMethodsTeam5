@@ -58,6 +58,7 @@ public:
     void printFamilies(string fileName);
 
 	void errorCheck(string fileName);
+	void buildIndividualMarriages(void);
 
 	enum IDType 
 	{

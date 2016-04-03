@@ -223,6 +223,7 @@ int main(int argc, const char * argv[])
 	manager->printDeceased(inputFileName);
 	manager->printOrphans(inputFileName);
 	manager->printMultipleBirths(inputFileName);
+	manager->buildIndividualMarriages();
 	manager->errorCheck(errorFileName);
     
     processedGEDCOM.close();
