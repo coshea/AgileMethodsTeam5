@@ -220,6 +220,9 @@ int main(int argc, const char * argv[])
     manager->printFamilies(inputFileName);
 	manager->printLivingMarried(inputFileName);
 	manager->printLivingSingle(inputFileName);
+	manager->printDeceased(inputFileName);
+	manager->printOrphans(inputFileName);
+	manager->printMultipleBirths(inputFileName);
 	manager->errorCheck(errorFileName);
     
     processedGEDCOM.close();

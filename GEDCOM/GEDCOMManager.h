@@ -13,6 +13,7 @@
 #include <map>
 #include "Individual.h"
 #include "Family.h"
+#include "Date.h"
 
 using namespace std;
 
@@ -29,11 +30,20 @@ public:
     
     void printIndividuals(string fileName);
 
+	// US29 - List deceased
+	void printDeceased(string fileName);
+
 	// US30 - List living Married
 	void printLivingMarried(string fileName);
 
 	// US31 - List living Single
 	void printLivingSingle(string fileName);
+
+	// US32 - List multiple birth
+	void printMultipleBirths(string fileName);
+
+	// US33 - List orphans
+	void printOrphans(string fileName);
     
     string addFamily(string id, int currentLineNum, string errorFile);
     

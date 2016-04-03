@@ -54,40 +54,129 @@ Individual GEDCOMManager::lookupIndividual(string id)
 void GEDCOMManager::printIndividuals(string fileName)
 {
     string outputFileName = "individuals" + string(fileName);
-    ofstream individualStream(outputFileName);
+    ofstream outputStream(outputFileName);
     for(map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
     {
-        individualStream << i->first << " " << i->second.getName() << "\n";
+        outputStream << i->first << " " << i->second.getName() << "\n";
     }
-    individualStream.close();
+    outputStream.close();
+}
+
+void GEDCOMManager::printDeceased(string fileName)
+{
+	string outputFileName = "deceased" + string(fileName);
+	ofstream outputStream(outputFileName);
+	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
+	{
+		if (i->second.isDead())
+		{
+			outputStream << i->first << " " << i->second.getName() << "\n";
+		}
+	}
+	outputStream.close();
 }
 
 void GEDCOMManager::printLivingMarried(string fileName)
 {
 	string outputFileName = "livingMarried" + string(fileName);
-	ofstream individualStream(outputFileName);
+	ofstream outputStream(outputFileName);
 	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
 	{
 		if (!i->second.isDead() && i->second.getFAMS() != "")
 		{
-			individualStream << i->first << " " << i->second.getName() << "\n";
+			outputStream << i->first << " " << i->second.getName() << "\n";
 		}
 	}
-	individualStream.close();
+	outputStream.close();
+}
+
+void GEDCOMManager::printMultipleBirths(string fileName)
+{
+	string outputFileName = "multipleBirths" + string(fileName);
+	ofstream outputStream(outputFileName);
+	
+	map<Date, vector<string> > birthdayToChild;
+
+	for (map<string, Family >::iterator i = families.begin(); i != families.end(); ++i)
+	{
+		vector<string> children = i->second.getChildren();
+
+		// Build map of birthdays to children
+		for each (string id in children)
+		{
+			Date bday = lookupIndividual(id).getBirth();
+			string name = lookupIndividual(id).getName();
+			if (birthdayToChild.find(bday) == birthdayToChild.end())
+			{
+				vector<string> names;
+				names.push_back(name);
+				birthdayToChild[bday] = names;
+			}
+			else
+			{
+				vector<string> names(birthdayToChild[bday]);
+				names.push_back(name);
+				birthdayToChild[bday] = names;
+			}
+		}
+	}
+
+	// Loop over map and output to file
+	for (map<Date, vector<string> >::iterator j = birthdayToChild.begin(); j != birthdayToChild.end(); ++j)
+	{
+		if (j->second.size() > 1)
+		{
+			outputStream << ((Date)j->first).toString() << "\n";
+
+			vector<string> names(j->second);
+			for each (string name in names)
+			{
+				outputStream << "\t" << name << "\n";
+			}
+
+			
+		}
+	}
+
+	outputStream.close();
+}
+
+void GEDCOMManager::printOrphans(string fileName)
+{
+	string outputFileName = "orphans" + string(fileName);
+	ofstream outputStream(outputFileName);
+	for (map<string, Family >::iterator i = families.begin(); i != families.end(); ++i)
+	{
+		string wife = i->second.getWife();
+		string husband = i->second.getHusband();
+
+		if (lookupIndividual(wife).isDead() && lookupIndividual(husband).isDead())
+		{
+			vector<string> children = i->second.getChildren();
+			for (int x = 0; x < children.size(); x++)
+			{
+				if (lookupIndividual(children[x]).getAge() < 18)
+				{
+					outputStream << children[x] << " " << lookupIndividual(children[x]).getName() << "\n";
+				}
+			}
+		}
+	}
+	outputStream.close();
 }
 
 void GEDCOMManager::printLivingSingle(string fileName)
 {
 	string outputFileName = "livingSingle" + string(fileName);
-	ofstream individualStream(outputFileName);
+	ofstream outputStream(outputFileName);
 	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
 	{
 		if (!i->second.isDead() && i->second.getFAMS() == "")
 		{
-			individualStream << i->first << " " << i->second.getName() << "\n";
+			outputStream << i->first << " " << i->second.getName() << "\n";
 		}
 	}
-	individualStream.close();
+	outputStream.close();
 }
 
 string GEDCOMManager::addFamily(string id, int currentLineNum, string errorFile)
