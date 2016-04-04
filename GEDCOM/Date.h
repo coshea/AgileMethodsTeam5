@@ -57,6 +57,8 @@ public:
 
 	int getEndOfMonthDay();
 
+	void SetDateDaysAgo(int numDays);
+
 	bool operator==(const Date& d1) const;
 	bool operator>(const Date& d1) const;
 	bool operator<(const Date& d1) const;

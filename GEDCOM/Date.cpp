@@ -390,4 +390,17 @@ bool Date::operator<(const Date & d1) const
 	return retVal;
 }
 
+//US35-37 sets the date to numDays ago 
+void Date::SetDateDaysAgo(int numDays)
+{
+	time_t currentTime = time(0);//time expressed in seconds
+	time_t newTime = currentTime - (numDays * 60 * 60 * 24);
+	tm* newDate = localtime(&newTime);
 
+	//account for the formatting of the tm struct
+	year = (newDate->tm_year + 1900);
+	month = (newDate->tm_mon + 1);
+	day = newDate->tm_mday;
+
+	buildFormattedDate();
+}
