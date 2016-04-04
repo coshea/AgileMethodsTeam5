@@ -57,6 +57,12 @@ public:
     
     void printFamilies(string fileName);
 
+	//US36-37 list deceased within 30 days & surviving relatives
+	void printRecentDeaths(string fileName, int daysAgo);
+
+	//US35 print biths within 30 days
+	void printRecentBirths(string fileName, int daysAgo);
+
 	void errorCheck(string fileName);
 	void buildIndividualMarriages(void);
 

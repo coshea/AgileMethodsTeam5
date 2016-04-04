@@ -231,6 +231,83 @@ void GEDCOMManager::printFamilies(string fileName)
     familyStream.close();
 }
 
+//US36-37 list deceased within 30 days & surviving relatives
+void GEDCOMManager::printRecentDeaths(string fileName, int numDaysAgo)
+{
+	Date daysAgo;
+	Family fam;
+	Individual wife, husband, selectedChild;
+	vector<string> children;
+	daysAgo.SetDateDaysAgo(numDaysAgo);
+	string deathsFileName = "RecentDeaths" + string(fileName);
+	string survivorsFileName = "RecentSurvivors" + string(fileName);
+	ofstream deathStream(deathsFileName);
+	ofstream survivorStream(survivorsFileName);
+
+	for (map<string, Individual>::iterator i = individuals.begin(); i != individuals.end(); ++i)
+	{
+		if (i->second.getDeath() > daysAgo)
+		{
+			deathStream << i->first << " " << i->second.getName() << endl;
+			fam = lookupFamily(i->second.getFAMS());
+			wife = lookupIndividual(fam.getWife());
+			husband = lookupIndividual(fam.getHusband());
+
+			if (!wife.isDead())
+			{
+				survivorStream << wife.getName() << 
+					" survived the recent death of her husband "<< i->second.getName() << endl;
+			}
+			if (!husband.isDead())
+			{
+				survivorStream << husband.getName() << 
+					" survived the recent death of his wife " << i->second.getName() << endl;
+			}
+
+			children = fam.getChildren();
+			for each (string  child in children)
+			{
+				selectedChild = lookupIndividual(child);
+				if (!selectedChild.isDead())
+				{
+					if (selectedChild.getSex() == "M")
+					{
+						survivorStream << selectedChild.getName() <<
+							" survived the recent death of his parent " << i->second.getName() << endl;
+					}
+					else
+					{
+						survivorStream << selectedChild.getName() <<
+							" survived the recent death of her parent " << i->second.getName() << endl;
+					}
+				}
+			}
+		}
+	}
+
+	deathStream.close();
+	survivorStream.close();
+}
+
+//US35 print biths within 30 days
+void GEDCOMManager::printRecentBirths(string fileName, int numDaysAgo)
+{
+	Date daysAgo;
+	daysAgo.SetDateDaysAgo(numDaysAgo);
+	string outputFileName = "RecentBirths" + string(fileName);
+	ofstream birthsStream(outputFileName);
+
+	for (map<string, Individual>::iterator i = individuals.begin(); i != individuals.end(); ++i)
+	{
+		if (i->second.getBirth() > daysAgo)
+		{
+			birthsStream << i->first << " " << i->second.getName() << endl;
+		}
+	}
+
+	birthsStream.close();
+}
+
 void GEDCOMManager::buildIndividualMarriages(void)
 {
 	for (map<string, Family>::iterator f = families.begin(); f != families.end(); ++f)

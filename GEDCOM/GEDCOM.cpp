@@ -225,6 +225,8 @@ int main(int argc, const char * argv[])
 	manager->printMultipleBirths(inputFileName);
 	manager->buildIndividualMarriages();
 	manager->errorCheck(errorFileName);
-    
+	manager->printRecentBirths(inputFileName, 30);
+	manager->printRecentDeaths(inputFileName, 30);
+
     processedGEDCOM.close();
 }
