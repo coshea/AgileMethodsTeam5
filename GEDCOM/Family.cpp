@@ -16,6 +16,7 @@ Family::Family()
 	m_wife = "";
 	//m_children;
 	m_lineNumber = -1;
+	m_Id = "";
 }
 
 void Family::setMarried(Date m)
@@ -76,4 +77,14 @@ void Family::setLineNumber(int lineNum)
 int Family::getLineNumber()
 {
 	return m_lineNumber;
+}
+
+void Family::setId(string Id)
+{
+	m_Id = Id;
+}
+
+string Family::getId()
+{
+	return m_Id;
 }

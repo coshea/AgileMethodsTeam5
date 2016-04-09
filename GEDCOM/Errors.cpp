@@ -549,3 +549,23 @@ void MoreThan5Births(string fileName, Family & f)
 		}
 	}
 }
+
+//US15 - Fewer than 15 siblings
+//There should be fewer than 15 siblings in a family
+void MoreThan15Siblings(string fileName, Family & f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	vector<string> children = f.getChildren();
+	string familyName = f.getId();
+	int lineNum = f.getLineNumber();
+
+	// check if there are more than 14 children
+	if (children.size() > 14)
+	{
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US15: Family" << " (" << familyName <<
+			") has more than 15 children.\n";
+	}
+}

@@ -149,6 +149,10 @@ int main(int argc, const char * argv[])
         {
             // Get FAM mapped to levelZeroID
             Family f = manager->lookupFamily(levelZeroID);
+			if (f.getId() == "")
+			{
+				f.setId(levelZeroID);
+			}
             if(level == 1 && tag == "HUSB")
             {
                 // Add husband

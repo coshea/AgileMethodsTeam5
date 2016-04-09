@@ -386,7 +386,10 @@ void GEDCOMManager::errorCheck(string fileName)
 		SiblingSpacing(fileName, i->second);
 
 		//US14
-		MoreThan5Births(fileName, i->second);		
+		MoreThan5Births(fileName, i->second);
+
+		//US15
+		MoreThan15Siblings(fileName, i->second);
 	}
 
 	// Marriage errors
