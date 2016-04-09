@@ -9,6 +9,8 @@
 #ifndef Family_h
 #define Family_h
 
+class Date;
+
 #include "Date.h"
 #include <string>
 #include <vector>

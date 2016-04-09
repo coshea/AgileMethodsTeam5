@@ -9,6 +9,8 @@
 #ifndef Individual_h
 #define Individual_h
 
+class Date;
+
 #include "Date.h"
 #include <string>
 

@@ -9,12 +9,12 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include "GEDCOM.h"
-#include "Utilities.h"
+#include <vector>
+#include "Date.h"
+#include "GEDCOMManager.h"
 #include "Individual.h"
 #include "Family.h"
-#include "GEDCOMManager.h"
-#include "UnitTest.h"
+#include "Utilities.h"
 
 // Main function
 int main(int argc, const char * argv[])
@@ -131,7 +131,7 @@ int main(int argc, const char * argv[])
 			}
 			else if (level == 2 && tokenizedLine[1] == "DATE")
 			{
-				Date d(tokenizedLine[2], tokenizedLine[3], tokenizedLine[4]);
+				Date d(line);
 				if (levelOneTAG == "BIRT")
 				{
 					i.setBirth(d);
@@ -156,7 +156,6 @@ int main(int argc, const char * argv[])
             if(level == 1 && tag == "HUSB")
             {
                 // Add husband
-                //manager->addHusbandToFamily(tokenizedLine[2], levelZeroID);
 				f.setHusband(tokenizedLine[2]);
 				f.setLineNumber(lineNumber - 1);//Subtract 1 to get the idx of FAM
 				manager->addFamily(levelZeroID, f);
@@ -164,7 +163,6 @@ int main(int argc, const char * argv[])
             else if(level == 1 && tag == "WIFE")
             {
                 // Add wife
-                //manager->addWifeToFamily(tokenizedLine[2], levelZeroID);
 				f.setWife(tokenizedLine[2]);
 				manager->addFamily(levelZeroID, f);
             }
@@ -185,7 +183,7 @@ int main(int argc, const char * argv[])
 			}
 			else if (level == 2 && tokenizedLine[1] == "DATE")
 			{
-				Date d(tokenizedLine[2], tokenizedLine[3], tokenizedLine[4]);
+				Date d(line);
 				if (levelOneTAG == "MARR")
 				{
 					f.setMarried(d);

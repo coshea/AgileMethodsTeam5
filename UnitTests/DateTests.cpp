@@ -309,5 +309,44 @@ namespace UnitTests
 			Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
 		}
 
+		TEST_METHOD(TestIncludePartialDates_DayMonthYear_Valid)
+		{
+			string line = "2 DATE 13 MAR 1999";
+			Date testDate(line);
+			Date expectedDate(13, 3, 1999);
+
+			bool actualValue = testDate.isDateValid();
+			Assert::IsTrue(actualValue, L"message", LINE_INFO());
+
+			bool actualDateCompareValue = testDate == expectedDate;
+			Assert::IsTrue(actualDateCompareValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestIncludePartialDates_MonthYear_Valid)
+		{
+			string line = "2 DATE MAR 1999";
+			Date testDate(line);
+			Date expectedDate(1, 3, 1999);
+
+			bool actualValue = testDate.isDateValid();
+			Assert::IsTrue(actualValue, L"message", LINE_INFO());
+
+			bool actualDateCompareValue = testDate == expectedDate;
+			Assert::IsTrue(actualDateCompareValue, L"message", LINE_INFO());
+		}
+
+		TEST_METHOD(TestIncludePartialDates_Year_Valid)
+		{
+			string line = "2 DATE 1999";
+			Date testDate(line);
+			Date expectedDate(1, 1, 1999);
+
+			bool actualValue = testDate.isDateValid();
+			Assert::IsTrue(actualValue, L"message", LINE_INFO());
+
+			bool actualDateCompareValue = testDate == expectedDate;
+			Assert::IsTrue(actualDateCompareValue, L"message", LINE_INFO());
+		}
+
 	};
 }

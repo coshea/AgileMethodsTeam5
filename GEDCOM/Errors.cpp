@@ -8,11 +8,9 @@
 #include "GEDCOMManager.h"
 #include "Date.h"
 #include "Family.h"
-#include <fstream>
 #include "Individual.h"
 #include "Logger.h"
 #include "Errors.h"
-#include <algorithm>
 
 // US03 - check that birth occurs before death
 void BirthBeforeDeath(string fileName, string first, Individual &i)

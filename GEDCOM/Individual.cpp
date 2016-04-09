@@ -7,6 +7,7 @@
 //
 
 #include "Individual.h"
+#include <time.h>
 
 Individual::Individual()
 {

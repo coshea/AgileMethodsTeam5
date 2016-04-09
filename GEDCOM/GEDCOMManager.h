@@ -9,11 +9,9 @@
 #ifndef GEDCOMManager_h
 #define GEDCOMManager_h
 
-#include <stdio.h>
 #include <map>
 #include "Individual.h"
 #include "Family.h"
-#include "Date.h"
 
 using namespace std;
 
