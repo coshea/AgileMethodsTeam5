@@ -24,5 +24,6 @@ void ParentsNotTooOld(string fileName, Family & f);
 void SiblingSpacing(string fileName, Family & f);
 void MoreThan5Births(string fileName, Family & f);
 void MoreThan15Siblings(string fileName, Family & f);
+void MaleLastNames(string fileName, Family & f);
 
 #endif /* Errors_h */

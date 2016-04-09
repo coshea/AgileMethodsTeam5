@@ -390,6 +390,9 @@ void GEDCOMManager::errorCheck(string fileName)
 
 		//US15
 		MoreThan15Siblings(fileName, i->second);
+
+		//US16
+		MaleLastNames(fileName, i->second);
 	}
 
 	// Marriage errors

@@ -74,8 +74,6 @@ Date::Date(string GEDCOMline)
 		year = 0;
 	}
 
-
-
 	buildFormattedDate();
 };
 

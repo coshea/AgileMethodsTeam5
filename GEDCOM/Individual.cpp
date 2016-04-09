@@ -30,6 +30,15 @@ string Individual::getName()
     return m_name;
 }
 
+string Individual::getLastName()
+{
+	size_t pos = m_name.find(" ") + 1;
+	if (pos == string::npos)
+		return "";
+
+	return m_name.substr(pos, string::npos);
+}
+
 void Individual::setSex(string s)
 {
     m_sex = s;

@@ -24,6 +24,8 @@ public:
     void setName(string n);
     
     string getName();
+
+	string getLastName();
     
     void setSex(string s);
     
