@@ -7,6 +7,8 @@
 //
 
 #include "Date.h"
+#include <sstream>
+#include <time.h>
 
 Date::Date()
 {
@@ -31,6 +33,47 @@ Date::Date(string d, string m, string y)
 	month = stringToMonth(m);
 	day = stoi(d);
 	year = stoi(y);
+	buildFormattedDate();
+};
+
+// contructor
+//US41 - Include partial dates
+//Accept and use dates without days or without days and months
+Date::Date(string GEDCOMline)
+{
+	// Split string into vector
+	vector<string> tokenizedLine;
+	tokenize(GEDCOMline, tokenizedLine);
+
+	// Line has day, month, year
+	if(tokenizedLine.size() == 5)
+	{
+		day = stoi(tokenizedLine[2]);
+		month = stringToMonth(tokenizedLine[3]);		
+		year = stoi(tokenizedLine[4]);
+	}
+	// Line has month, year
+	else if (tokenizedLine.size() == 4)
+	{
+		day = 1;
+		month = stringToMonth(tokenizedLine[2]);
+		year = stoi(tokenizedLine[3]);
+	}
+	// Line has year
+	else if (tokenizedLine.size() == 3)
+	{
+		day = 1;
+		month = 1;
+		year = stoi(tokenizedLine[2]);
+	}
+	// Line is not valid
+	else
+	{
+		day = 0;
+		month = 0;
+		year = 0;
+	}
+
 	buildFormattedDate();
 };
 
@@ -60,66 +103,64 @@ string Date::toString()
 
 string Date::monthToString(int m)
 {
-    string ret;
     switch (m)
     {
         case 1:
-            ret = "JAN";
+			return "JAN";
         case 2:
-            ret = "FEB";
+			return "FEB";
         case 3:
-            ret = "MAR";
+			return "MAR";
         case 4:
-            ret = "APR";
+			return "APR";
         case 5:
-            ret = "MAY";
+			return "MAY";
         case 6:
-            ret = "JUN";
+			return "JUN";
         case 7:
-            ret = "JUL";
+			return "JUL";
         case 8:
-            ret = "AUG";
+			return "AUG";
         case 9:
-            ret = "SEP";
+			return "SEP";
         case 10:
-            ret = "OCT";
+			return "OCT";
         case 11:
-            ret = "NOV";
+			return "NOV";
         case 12:
-            ret = "DEC";
+			return "DEC";
+		default:
+			return "JAN";
     }
-    return ret;
 };
 
 int Date::stringToMonth(string m)
 {
-	int ret;
 	if (m == "JAN")
-		ret = 1;
+		return 1;
 	if (m == "FEB")
-		ret = 2;
+		return 2;
 	if (m == "MAR")
-		ret = 3;
+		return 3;
 	if (m == "APR")
-		ret = 4;
+		return 4;
 	if (m == "MAY")
-		ret = 5;
+		return 5;
 	if (m == "JUN")
-		ret = 6;
+		return 6;
 	if (m == "JUL")
-		ret = 7;
+		return 7;
 	if (m == "AUG")
-		ret = 8;
+		return 8;
 	if (m == "SEP")
-		ret = 9;
+		return 9;
 	if (m == "OCT")
-		ret = 10;
+		return 10;
 	if (m == "NOV")
-		ret = 11;
+		return 11;
 	if (m == "DEC")
-		ret = 12;
-
-	return ret;
+		return 12;
+	return 1;
 };
 
 //US42 Reject illegitimate dates
@@ -404,3 +445,21 @@ void Date::SetDateDaysAgo(int numDays)
 
 	buildFormattedDate();
 }
+
+// Function to split string into a vector based on whitespace
+void Date::tokenize(string input, vector<string>& output)
+{
+	string token;
+	for (unsigned int i = 0; i <= input.size(); i++)
+	{
+		if (isspace(input[i]) || i == input.size())
+		{
+			output.push_back(token);
+			token = "";
+		}
+		else
+		{
+			token += input[i];
+		}
+	}
+};

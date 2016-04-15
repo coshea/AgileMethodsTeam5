@@ -9,6 +9,8 @@
 #ifndef Individual_h
 #define Individual_h
 
+class Date;
+
 #include "Date.h"
 #include <string>
 #include <vector>
@@ -23,6 +25,8 @@ public:
     void setName(string n);
     
     string getName();
+
+	string getLastName();
     
     void setSex(string s);
     

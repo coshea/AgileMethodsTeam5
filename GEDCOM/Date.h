@@ -11,23 +11,26 @@
 
 #include <stdio.h>
 #include <string>
-#include <sstream>
-#include <ctime>
-#include <time.h>
+#include <vector>
+
 
 using namespace std;
+//using namespace Utilities;
 
 class Date
 {
 public:
     
-    Date();
+	Date();
     
     // contructor
-    Date(int d, int m, int y);
+	Date(int d, int m, int y);
 
 	// contructor
 	Date(string d, string m, string y);
+
+	// contructor
+	Date(string GEDCOMline);
         
     int getMonth();
         
@@ -69,7 +72,7 @@ private:
 	tm formattedDate;
 	time_t formmattedTime;
 
-	
+	void tokenize(string input, vector<string>& output);
 	void buildFormattedDate();
 };
 
