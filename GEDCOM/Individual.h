@@ -11,6 +11,7 @@
 
 #include "Date.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -51,6 +52,10 @@ public:
 
 	int getAge();
 
+	void addSibling(string sib);
+
+	vector<string> getSiblings(void);
+
 private:
     string m_name;
     string m_sex;
@@ -58,6 +63,7 @@ private:
     Date   m_death;
     string m_famChild;
     string m_famSpouse;
+	vector<string> m_siblings;
 	int m_lineNumber;
 };
 

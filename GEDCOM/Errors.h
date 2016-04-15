@@ -23,5 +23,6 @@ void ChildsBirthBeforeParentsDeath(string fileName, Family & f);
 void ParentsNotTooOld(string fileName, Family & f);
 void SiblingSpacing(string fileName, Family & f);
 void MoreThan5Births(string fileName, Family & f);
+void AuntsUnclesNiecesNephews(string fileName, Family & f);
 
 #endif /* Errors_h */

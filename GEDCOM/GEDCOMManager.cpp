@@ -386,7 +386,10 @@ void GEDCOMManager::errorCheck(string fileName)
 		SiblingSpacing(fileName, i->second);
 
 		//US14
-		MoreThan5Births(fileName, i->second);		
+		MoreThan5Births(fileName, i->second);
+
+		//US20
+		AuntsUnclesNiecesNephews(fileName, i->second);
 	}
 
 	// Marriage errors
@@ -394,5 +397,81 @@ void GEDCOMManager::errorCheck(string fileName)
 	{
 		//US11
 		NoBigamy(fileName, m->first, m->second);
+	}
+}
+
+void GEDCOMManager::addAuntsAndUnclesToFamilies(void)
+{
+	vector<string> children, siblings;
+	Individual husband, wife, tempInd;
+	string sex;
+
+	//first add siblings for each individual
+	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)
+	{
+		children = i->second.getChildren();
+		if (children.size() > 1)
+		{
+			for each (string child in children)
+			{
+				for each (string sibling in children)
+				{
+					if (sibling != child)
+					{
+						tempInd = lookupIndividual(child);
+						tempInd.addSibling(sibling);
+						addIndividual(child, tempInd);
+					}
+				}
+			}
+		}
+	}
+
+	//then add the aunts and uncles to each family
+	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)
+	{
+		husband = lookupIndividual(i->second.getHusband());
+
+		siblings = husband.getSiblings();
+
+		if (siblings.size() >= 1)
+		{
+			for each(string sibling in siblings)
+			{
+				sex = lookupIndividual(sibling).getSex();
+
+				if (sex == "M")
+				{
+					i->second.addUncle(sibling);
+				}
+				else if (sex == "F")
+				{
+					i->second.addAunt(sibling);
+				}
+				addFamily(i->first, i->second);
+			}
+		}
+
+		wife = lookupIndividual(i->second.getWife());
+
+		siblings = wife.getSiblings();
+
+		if (siblings.size() >= 1)
+		{
+			for each(string sibling in siblings)
+			{
+				sex = lookupIndividual(sibling).getSex();
+
+				if (sex == "M")
+				{
+					i->second.addUncle(sibling);
+				}
+				else if (sex == "F")
+				{
+					i->second.addAunt(sibling);
+				}
+				addFamily(i->first, i->second);
+			}
+		}
 	}
 }

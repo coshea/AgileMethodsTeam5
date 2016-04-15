@@ -38,6 +38,14 @@ public:
     
     void addChild(string child);
     
+	void addAunt(string aunt);
+
+	void addUncle(string uncle);
+
+	vector<string> getAunts();
+
+	vector<string> getUncles();
+
     vector<string> getChildren();
 
 	void setLineNumber(int lineNum);
@@ -50,6 +58,8 @@ private:
     string m_husband;
     string m_wife;
     vector<string> m_children;
+	vector<string> m_aunts;
+	vector<string> m_uncles;
 	int m_lineNumber;
 };
 

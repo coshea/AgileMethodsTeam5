@@ -216,6 +216,7 @@ int main(int argc, const char * argv[])
         }
     } // while (getline(gedcomFile, line))
     
+	manager->addAuntsAndUnclesToFamilies();
     manager->printIndividuals(inputFileName);
     manager->printFamilies(inputFileName);
 	manager->printLivingMarried(inputFileName);

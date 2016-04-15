@@ -549,3 +549,74 @@ void MoreThan5Births(string fileName, Family & f)
 		}
 	}
 }
+
+//US20 Aunts and Uncles should not marry Nieces and Nephews
+void AuntsUnclesNiecesNephews(string fileName, Family &f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+	vector<string> children, auntsUncles;
+	string spouse, childsSex, fams;
+	int lineNum;
+
+	children = f.getChildren();
+
+	if (children.size() >= 1)
+	{
+		for each(string child in children)
+		{
+			auntsUncles = f.getAunts();
+			for each(string auntUncle in auntsUncles)
+			{
+				fams = manager->lookupIndividual(auntUncle).getFAMS();
+				if (fams != "")
+				{
+					spouse = manager->lookupFamily(spouse).getHusband();
+				}
+				if (spouse == child)
+				{
+					lineNum = manager->lookupIndividual(auntUncle).getLineNumber();
+					childsSex = manager->lookupIndividual(child).getSex();
+					if (childsSex == "M")
+					{
+						errorLog(LogLevel::ERROR, lineNum) <<
+							"US20: " << auntUncle <<
+							" Married her nephew " << child << endl;
+					}
+					else if (childsSex == "F")
+					{
+						errorLog(LogLevel::ERROR, lineNum) <<
+							"US20: " << auntUncle <<
+							" Married her niece " << child << endl;
+					}
+				}
+			}
+			auntsUncles = f.getUncles();
+			for each(string auntUncle in auntsUncles)
+			{
+				fams = manager->lookupIndividual(auntUncle).getFAMS();
+				if (fams != "")
+				{
+					spouse = manager->lookupFamily(spouse).getWife();
+				}
+				if (spouse == child)
+				{
+					lineNum = manager->lookupIndividual(auntUncle).getLineNumber();
+					childsSex = manager->lookupIndividual(child).getSex();
+					if (childsSex == "M")
+					{
+						errorLog(LogLevel::ERROR, lineNum) <<
+							"US20: " << auntUncle <<
+							" Married his nephew " << child << endl;
+					}
+					else if (childsSex == "F")
+					{
+						errorLog(LogLevel::ERROR, lineNum) <<
+							"US20: " << auntUncle <<
+							" Married his niece " << child << endl;
+					}
+				}
+			}
+		}
+	}
+}

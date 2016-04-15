@@ -77,3 +77,23 @@ int Family::getLineNumber()
 {
 	return m_lineNumber;
 }
+
+void Family::addAunt(string aunt)
+{
+	m_aunts.push_back(aunt);
+}
+
+void Family::addUncle(string uncle)
+{
+	m_uncles.push_back(uncle);
+}
+
+vector<string> Family::getAunts()
+{
+	return m_aunts;
+}
+
+vector<string> Family::getUncles()
+{
+	return m_uncles;
+}

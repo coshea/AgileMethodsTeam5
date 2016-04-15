@@ -131,3 +131,13 @@ int Individual::getAge()
 	
 	return years;
 }
+
+void Individual::addSibling(string sib) 
+{
+	m_siblings.push_back(sib);
+}
+
+vector<string> Individual::getSiblings(void)
+{
+	return m_siblings;
+}
