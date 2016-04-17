@@ -620,3 +620,61 @@ void AuntsUnclesNiecesNephews(string fileName, Family &f)
 		}
 	}
 }
+
+
+//US15 - Fewer than 15 siblings
+//There should be fewer than 15 siblings in a family
+void MoreThan15Siblings(string fileName, Family & f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	vector<string> children = f.getChildren();
+	string familyName = f.getId();
+	int lineNum = f.getLineNumber();
+
+	// check if there are more than 14 children
+	if (children.size() > 14)
+	{
+		errorLog(LogLevel::ERROR, lineNum) <<
+			"US15: Family" << " (" << familyName <<
+			") has more than 15 children.\n";
+	}
+}
+
+//US16 - Male last names
+//All male members of a family should have the same last name
+void MaleLastNames(string fileName, Family& f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	vector<string> children = f.getChildren();
+	string fatherId = f.getHusband();
+
+	Individual father = manager->lookupIndividual(fatherId);
+	string fatherLastName = father.getLastName();
+
+	for each (string Id in children)
+	{
+		Individual child = manager->lookupIndividual(Id);
+
+		// only check male children
+		if (child.getSex() != "M")
+			continue;
+
+		int lineNum = child.getLineNumber();
+		string childName = child.getName();
+		string childLastName = child.getLastName();
+
+		//Male childs last name should match fathers name
+		if (childLastName != fatherLastName)
+		{
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US16: " << childName << " (" << Id
+				<< ") last name does not match fathers name of "
+				<< fatherLastName << " (" << fatherId << ")\n";
+		}
+	}
+
+}

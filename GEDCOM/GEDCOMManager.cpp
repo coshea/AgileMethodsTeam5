@@ -388,6 +388,12 @@ void GEDCOMManager::errorCheck(string fileName)
 		//US14
 		MoreThan5Births(fileName, i->second);
 
+		//US15
+		MoreThan15Siblings(fileName, i->second);
+
+		//US16
+		MaleLastNames(fileName, i->second);
+
 		//US20
 		AuntsUnclesNiecesNephews(fileName, i->second);
 	}

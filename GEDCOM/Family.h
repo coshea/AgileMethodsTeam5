@@ -51,6 +51,10 @@ public:
 	void setLineNumber(int lineNum);
 
 	int getLineNumber();
+
+	void setId(string Id);
+
+	string getId();
     
 private:
 	Date m_married = { 0, 0, 0 };
@@ -61,6 +65,7 @@ private:
 	vector<string> m_aunts;
 	vector<string> m_uncles;
 	int m_lineNumber;
+	string m_Id;
 };
 
 #endif /* Family_h */

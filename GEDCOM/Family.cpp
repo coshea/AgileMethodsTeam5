@@ -97,3 +97,14 @@ vector<string> Family::getUncles()
 {
 	return m_uncles;
 }
+
+
+void Family::setId(string Id)
+{
+	m_Id = Id;
+}
+
+string Family::getId()
+{
+	return m_Id;
+}
