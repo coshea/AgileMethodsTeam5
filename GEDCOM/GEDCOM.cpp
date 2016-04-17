@@ -38,6 +38,8 @@ int main(int argc, const char * argv[])
 	string errorFileName = "errors" + string(inputFileName);
 
     ofstream processedGEDCOM(outputFileName);
+
+	ofstream cleanErrorLog(errorFileName);
     
     // read lines from input file
     string line;

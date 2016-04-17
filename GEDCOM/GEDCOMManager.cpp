@@ -394,6 +394,15 @@ void GEDCOMManager::errorCheck(string fileName)
 		//US16
 		MaleLastNames(fileName, i->second);
 
+		for (map<string, Family>::iterator f = families.begin(); f != families.end(); f++)
+		{
+			//US17
+			NoMarriageToChild(fileName, i->second, f->second);
+
+			//US18	
+			NoMarriageToSibling(fileName, i->second, f->second);
+		}
+
 		//US20
 		AuntsUnclesNiecesNephews(fileName, i->second);
 	}

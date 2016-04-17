@@ -26,5 +26,7 @@ void MoreThan5Births(string fileName, Family & f);
 void AuntsUnclesNiecesNephews(string fileName, Family & f);
 void MoreThan15Siblings(string fileName, Family & f);
 void MaleLastNames(string fileName, Family & f);
+void NoMarriageToChild(string fileName, Family & i, Family & f);
+void NoMarriageToSibling(string fileName, Family & i, Family & f);
 
 #endif /* Errors_h */

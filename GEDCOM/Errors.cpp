@@ -571,7 +571,7 @@ void AuntsUnclesNiecesNephews(string fileName, Family &f)
 				fams = manager->lookupIndividual(auntUncle).getFAMS();
 				if (fams != "")
 				{
-					spouse = manager->lookupFamily(spouse).getHusband();
+					//spouse = manager->lookupFamily(spouse).getHusband();
 				}
 				if (spouse == child)
 				{
@@ -597,7 +597,7 @@ void AuntsUnclesNiecesNephews(string fileName, Family &f)
 				fams = manager->lookupIndividual(auntUncle).getFAMS();
 				if (fams != "")
 				{
-					spouse = manager->lookupFamily(spouse).getWife();
+					//spouse = manager->lookupFamily(spouse).getWife();
 				}
 				if (spouse == child)
 				{
@@ -674,6 +674,115 @@ void MaleLastNames(string fileName, Family& f)
 				"US16: " << childName << " (" << Id
 				<< ") last name does not match fathers name of "
 				<< fatherLastName << " (" << fatherId << ")\n";
+		}
+	}
+
+}
+
+//US17 - No marriages to descendants
+//Parents should not marry any of their descendants
+void NoMarriageToChild(string fileName, Family& i, Family& f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	string fatherId = i.getHusband();
+	Individual father = manager->lookupIndividual(fatherId);
+	string motherId = i.getWife();
+	Individual mother = manager->lookupIndividual(motherId);
+	vector<string> children = i.getChildren();
+
+	string husbandId = f.getHusband();
+	string wifeId = f.getWife();
+
+	for each (string childId in children)
+	{
+		if ((fatherId == husbandId) &&
+			(wifeId == childId))
+		{
+			int lineNum = father.getLineNumber();
+			string fatherName = father.getName();
+			Individual child = manager->lookupIndividual(childId);
+			string childName = child.getName();
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US17: " << fatherName << " (" << fatherId
+				<< ") married his child " << childName << " (" << childId << ")\n";
+		}
+
+		if ((motherId == wifeId) &&
+			(husbandId == childId))
+		{
+			int lineNum = mother.getLineNumber();
+			string motherName = mother.getName();
+			Individual child = manager->lookupIndividual(childId);
+			string childName = child.getName();
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US17: " << motherName << " (" << motherId
+				<< ") married her child " << childName << " (" << childId << ")\n";
+		}
+	}
+
+}
+
+//US18 - No marriages to siblings
+//Siblings should not marry one another
+void NoMarriageToSibling(string fileName, Family& i, Family& f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+
+	vector<string> children = i.getChildren();
+
+	string husbandId = f.getHusband();
+	string wifeId = f.getWife();
+
+	string hubbieId;
+	string wifieId;
+
+	for each (string childId in children)
+	{
+		hubbieId = "";
+		wifieId = "";
+		Individual firstChild = manager->lookupIndividual(childId);
+		if (firstChild.getSex() != "F")
+		{
+			hubbieId = childId;
+		}
+		else // Sex == "F"
+		{
+			wifieId = childId;
+		}
+
+		for each (string childId in children)
+		{
+			Individual secondChild = manager->lookupIndividual(childId);
+			if (secondChild.getSex() != "F")
+			{
+				if (hubbieId == "")
+				{
+					hubbieId = childId;
+				}
+			}
+			else // Sex == "F"
+			{
+				if (wifieId == "")
+				{
+					wifieId = childId;
+				}
+			}
+		}
+
+		if ((husbandId == hubbieId) &&
+			(wifeId == wifieId))
+		{
+			Individual husband = manager->lookupIndividual(husbandId);
+			int lineNum = husband.getLineNumber();
+			string husbandName = husband.getName();
+			Individual wife = manager->lookupIndividual(wifeId);
+			string wifeName = wife.getName();
+			errorLog(LogLevel::ERROR, lineNum) <<
+				"US18: " << husbandName << " (" << husbandId
+				<< ") married his sibling " << wifeName << " (" << wifeId << ")\n";
 		}
 	}
 
