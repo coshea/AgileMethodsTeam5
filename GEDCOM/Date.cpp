@@ -65,28 +65,40 @@ string Date::monthToString(int m)
     {
         case 1:
             ret = "JAN";
+			break;
         case 2:
             ret = "FEB";
+			break;
         case 3:
             ret = "MAR";
+			break;
         case 4:
             ret = "APR";
+			break;
         case 5:
             ret = "MAY";
+			break;
         case 6:
             ret = "JUN";
+			break;
         case 7:
             ret = "JUL";
+			break;
         case 8:
             ret = "AUG";
+			break;
         case 9:
             ret = "SEP";
+			break;
         case 10:
             ret = "OCT";
+			break;
         case 11:
             ret = "NOV";
+			break;
         case 12:
             ret = "DEC";
+			break;
     }
     return ret;
 };
@@ -388,6 +400,18 @@ bool Date::operator<(const Date & d1) const
 	}
 
 	return retVal;
+}
+
+time_t Date::sinceEpochPlus200()
+{
+	struct tm t = { 0 };
+	t.tm_year = year - 1700;
+	t.tm_mon = month - 1;
+	t.tm_mday = day;
+	t.tm_hour = 0;
+	t.tm_min = 0;
+	t.tm_sec = 0;
+	return mktime(&t);
 }
 
 //US35-37 sets the date to numDays ago 

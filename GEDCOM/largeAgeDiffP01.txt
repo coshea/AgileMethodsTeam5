@@ -1,0 +1,8 @@
+Jane Smith/Doe was at least twice as old as John Smith when married.
+	Married: JAN 1 1965
+	Older: JAN 1 1840
+	Younger: JAN 1 1940
+John Smith was at least twice as old as Becky Smith when married.
+	Married: MAY 1 2010
+	Older: JAN 1 1990
+	Younger: MAY 1 2000
