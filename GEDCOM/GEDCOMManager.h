@@ -45,6 +45,15 @@ public:
 	// US33 - List orphans
 	void printOrphans(string fileName);
     
+	// US34 - List Large Age Diff
+	void printLargeAgeDiff(string fileName);
+
+	// US38 - List Upcoming Birthdays
+	void printUpcomingBirthdays(string fileName);
+
+	// US39 - List Upcoming Anniv
+	void printUpcomingAnniv(string fileName);
+    
     string addFamily(string id, int currentLineNum, string errorFile);
     
     void addFamily(string id, Family f);

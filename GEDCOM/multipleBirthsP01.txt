@@ -8,4 +8,3 @@ JAN 1 2005
 	Mike Smith
 	Matt Smith
 	Marty Smith
-	Marco Smith

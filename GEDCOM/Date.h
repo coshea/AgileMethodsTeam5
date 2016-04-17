@@ -65,6 +65,10 @@ public:
 	bool operator==(const Date& d1) const;
 	bool operator>(const Date& d1) const;
 	bool operator<(const Date& d1) const;
+
+	// Convert to Epoch plus 200 years to get around time_t problems with dates before epoch
+	time_t sinceEpochPlus200();
+
 private:
     int month;
     int day;

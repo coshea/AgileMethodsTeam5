@@ -431,6 +431,18 @@ bool Date::operator<(const Date & d1) const
 	return retVal;
 }
 
+time_t Date::sinceEpochPlus200()
+{
+	struct tm t = { 0 };
+	t.tm_year = year - 1700;
+	t.tm_mon = month - 1;
+	t.tm_mday = day;
+	t.tm_hour = 0;
+	t.tm_min = 0;
+	t.tm_sec = 0;
+	return mktime(&t);
+}
+
 //US35-37 sets the date to numDays ago 
 void Date::SetDateDaysAgo(int numDays)
 {

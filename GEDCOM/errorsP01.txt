@@ -60,6 +60,10 @@ Line 140 (ERROR)	US09: Birth date of Marty Smith (@I20@) is greater than 9 month
 
 Line 146 (ERROR)	US09: Birth date of Marco Smith (@I21@) is greater than 9 months after father died.
 
+Line 146 (ERROR)	US13: Birth dates of Marco Smith (@I21@) and Marty Smith (@I20@) are more than 2 days apart but less than 8 months apart.
+
+Line 140 (ERROR)	US13: Birth dates of Marty Smith (@I20@) and Marco Smith (@I21@) are more than 2 days apart but less than 8 months apart.
+
 Line 30 (ERROR)	US14: Maria Smith/Lopez (@I4@) had multiple births more than 5.
 
 Line 73 (ERROR)	US18: Mark Smith (@I10@) married his sibling Kate Smith (@I11@)

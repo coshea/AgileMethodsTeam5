@@ -232,6 +232,9 @@ int main(int argc, const char * argv[])
 	manager->errorCheck(errorFileName);
 	manager->printRecentBirths(inputFileName, 30);
 	manager->printRecentDeaths(inputFileName, 30);
+	manager->printUpcomingBirthdays(inputFileName);
+	manager->printUpcomingAnniv(inputFileName);
+	manager->printLargeAgeDiff(inputFileName);
 
     processedGEDCOM.close();
 }

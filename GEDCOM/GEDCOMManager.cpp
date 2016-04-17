@@ -182,6 +182,81 @@ void GEDCOMManager::printLivingSingle(string fileName)
 	outputStream.close();
 }
 
+
+void GEDCOMManager::printLargeAgeDiff(string fileName)
+{
+	string outputFileName = "largeAgeDiff" + string(fileName);
+	ofstream outputStream(outputFileName);
+	for (map<string, Family >::iterator i = families.begin(); i != families.end(); ++i)
+	{
+		time_t married = i->second.getMarried().sinceEpochPlus200();
+		time_t ageHusb = lookupIndividual(i->second.getHusband()).getBirth().sinceEpochPlus200();
+		time_t ageWife = lookupIndividual(i->second.getWife()).getBirth().sinceEpochPlus200();
+
+		time_t husbAgeAtWedd = married - ageHusb;
+		time_t wifeAgeAtWedd = married - ageWife;
+
+		time_t older = (husbAgeAtWedd > wifeAgeAtWedd) ? husbAgeAtWedd : wifeAgeAtWedd;
+		string older_ID = (husbAgeAtWedd > wifeAgeAtWedd) ? i->second.getHusband() : i->second.getWife();
+		time_t younger = (husbAgeAtWedd < wifeAgeAtWedd) ? husbAgeAtWedd : wifeAgeAtWedd;
+		string younger_ID = (husbAgeAtWedd < wifeAgeAtWedd) ? i->second.getHusband() : i->second.getWife();
+
+		if ( (younger * 2) < older && older > 0 && younger > 0)
+		{
+			outputStream << lookupIndividual(older_ID).getName() << " was at least twice as old as " << lookupIndividual(younger_ID).getName() << " when married.\n";
+			outputStream << "\t" << "Married: " << i->second.getMarried().toString() << "\n";
+			outputStream << "\t" << "Older: " << lookupIndividual(older_ID).getBirth().toString() << "\n";
+			outputStream << "\t" << "Younger: " << lookupIndividual(younger_ID).getBirth().toString() << "\n";
+		}
+	}
+	outputStream.close();
+}
+
+void GEDCOMManager::printUpcomingBirthdays(string fileName)
+{
+	string outputFileName = "upcomingBirthdays" + string(fileName);
+	ofstream outputStream(outputFileName);
+	Date upcoming;
+	upcoming.SetDateDaysAgo(-30);
+	Date today;
+	today.SetDateDaysAgo(0);
+	for (map<string, Individual >::iterator i = individuals.begin(); i != individuals.end(); ++i)
+	{
+		int month = i->second.getBirth().getMonth();
+		int day = i->second.getBirth().getDay();
+		int year = upcoming.getYear();
+		Date birthDate(day, month, year);
+		if (today < birthDate && birthDate < upcoming)
+		{
+			outputStream << i->second.getName() << " will be celebrating their birthday on " << birthDate.toString() << ".\n";
+		}
+	}
+	outputStream.close();
+}
+void GEDCOMManager::printUpcomingAnniv(string fileName)
+{
+	string outputFileName = "upcomingAnniv" + string(fileName);
+	ofstream outputStream(outputFileName);
+	Date upcoming;
+	upcoming.SetDateDaysAgo(-30);
+	Date today;
+	today.SetDateDaysAgo(0);
+	for (map<string, Family >::iterator i = families.begin(); i != families.end(); ++i)
+	{
+		int month = i->second.getMarried().getMonth();
+		int day = i->second.getMarried().getDay();
+		int year = upcoming.getYear();
+		Date annivDate(day, month, year);
+		if (today < annivDate && annivDate < upcoming)
+		{
+			Individual husb = lookupIndividual(i->second.getHusband());
+			Individual wife = lookupIndividual(i->second.getWife());
+			outputStream << husb.getName() << " and " << wife.getName() << " will be celebrating their anniversary on " << annivDate.toString() << ".\n";
+		}
+	}
+	outputStream.close();
+}
+
 string GEDCOMManager::addFamily(string id, int currentLineNum, string errorFile)
 {
 	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)
