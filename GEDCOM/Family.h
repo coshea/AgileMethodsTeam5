@@ -42,11 +42,15 @@ public:
 
 	void addUncle(string uncle);
 
+	void addCousin(string cousin);
+
 	vector<string> getAunts();
 
 	vector<string> getUncles();
 
     vector<string> getChildren();
+
+	vector<string> getCousins();
 
 	void setLineNumber(int lineNum);
 
@@ -64,8 +68,9 @@ private:
     vector<string> m_children;
 	vector<string> m_aunts;
 	vector<string> m_uncles;
+	vector<string> m_cousins;
 	int m_lineNumber;
 	string m_Id;
 };
 
-#endif /* Family_h */
+#endif /* Family_h */1

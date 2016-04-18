@@ -86,6 +86,8 @@ Line 191 (ERROR)	US16: Barry Jackson (@I28@) last name does not match fathers na
 
 Line 164 (ERROR)	US20: @I24@ Married her nephew @I25@
 
+Line 278 (ERROR)	US19: @I30@ and @I27@ are married first cousins
+
 Line 96 (ERROR)	US11: Marriage of Bob Johnson (@I13@) resulted in Bigamy.
 
 Line 4 (ERROR)	US11: Marriage of John Smith (@I1@) resulted in Bigamy.

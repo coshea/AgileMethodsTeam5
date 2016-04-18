@@ -480,6 +480,9 @@ void GEDCOMManager::errorCheck(string fileName)
 
 		//US20
 		AuntsUnclesNiecesNephews(fileName, i->second);
+
+		//US19
+		NoCousinMarriage(fileName, i->second);
 	}
 
 	// Marriage errors
@@ -490,11 +493,11 @@ void GEDCOMManager::errorCheck(string fileName)
 	}
 }
 
-void GEDCOMManager::addAuntsAndUnclesToFamilies(void)
+void GEDCOMManager::addExtendedFamily(void)
 {
-	vector<string> children, siblings;
-	Individual husband, wife, tempInd;
-	string sex;
+	vector<string> children, siblings, cousinIDs;
+	Individual husband, wife, tempInd, currentSib;
+	string sex, cousinFamID;
 
 	//first add siblings for each individual
 	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)
@@ -517,7 +520,7 @@ void GEDCOMManager::addAuntsAndUnclesToFamilies(void)
 		}
 	}
 
-	//then add the aunts and uncles to each family
+	//then add the aunts uncles and cousins to each family
 	for (map<string, Family>::iterator i = families.begin(); i != families.end(); i++)
 	{
 		husband = lookupIndividual(i->second.getHusband());
@@ -528,7 +531,9 @@ void GEDCOMManager::addAuntsAndUnclesToFamilies(void)
 		{
 			for each(string sibling in siblings)
 			{
-				sex = lookupIndividual(sibling).getSex();
+				currentSib = lookupIndividual(sibling);
+
+				sex = currentSib.getSex();
 
 				if (sex == "M")
 				{
@@ -537,6 +542,20 @@ void GEDCOMManager::addAuntsAndUnclesToFamilies(void)
 				else if (sex == "F")
 				{
 					i->second.addAunt(sibling);
+				}
+
+				cousinFamID = currentSib.getFAMS();
+				if (cousinFamID != "")
+				{
+					cousinIDs = lookupFamily(cousinFamID).getChildren();
+
+					if (cousinIDs.size() >= 1)
+					{
+						for each(string cous in cousinIDs)
+						{
+							i->second.addCousin(cous);
+						}
+					}
 				}
 				addFamily(i->first, i->second);
 			}
@@ -550,7 +569,9 @@ void GEDCOMManager::addAuntsAndUnclesToFamilies(void)
 		{
 			for each(string sibling in siblings)
 			{
-				sex = lookupIndividual(sibling).getSex();
+				currentSib = lookupIndividual(sibling);
+
+				sex = currentSib.getSex();
 
 				if (sex == "M")
 				{
@@ -559,6 +580,20 @@ void GEDCOMManager::addAuntsAndUnclesToFamilies(void)
 				else if (sex == "F")
 				{
 					i->second.addAunt(sibling);
+				}
+
+				cousinFamID = currentSib.getFAMS();
+				if (cousinFamID != "")
+				{
+					cousinIDs = lookupFamily(cousinFamID).getChildren();
+
+					if (cousinIDs.size() >= 1)
+					{
+						for each(string cous in cousinIDs)
+						{
+							i->second.addCousin(cous);
+						}
+					}
 				}
 				addFamily(i->first, i->second);
 			}

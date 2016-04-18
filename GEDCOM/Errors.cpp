@@ -621,6 +621,53 @@ void AuntsUnclesNiecesNephews(string fileName, Family &f)
 	}
 }
 
+//US19 First cousins should not marry
+void NoCousinMarriage(string fileName, Family &f)
+{
+	GEDCOMManager * manager = GEDCOMManager::Instance();
+	Logger errorLog(fileName);
+	vector<string> children, cousins;
+	string spouse, childsSex, fams;
+	int lineNum;
+
+	children = f.getChildren();
+
+	if (children.size() >= 1)
+	{
+		cousins = f.getCousins();
+
+		if (cousins.size() >= 1)
+		{
+			for each(string child in children)
+			{
+				for each(string cousin in cousins)
+				{
+					fams = manager->lookupIndividual(cousin).getFAMS();
+					if (fams != "")
+					{
+						if (manager->lookupIndividual(child).getSex() == "M")
+						{
+							spouse = manager->lookupFamily(fams).getWife();
+						}
+						else
+						{
+							spouse = manager->lookupFamily(fams).getHusband();
+						}
+
+						if (spouse == child)
+						{
+							lineNum = manager->lookupFamily(fams).getLineNumber();
+							
+							errorLog(LogLevel::ERROR, lineNum) <<
+								"US19: " << cousin << " and " << child 
+								<< " are married first cousins" << endl;
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
 //US15 - Fewer than 15 siblings
 //There should be fewer than 15 siblings in a family

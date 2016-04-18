@@ -88,6 +88,11 @@ void Family::addUncle(string uncle)
 	m_uncles.push_back(uncle);
 }
 
+void Family::addCousin(string cousin)
+{
+	m_cousins.push_back(cousin);
+}
+
 vector<string> Family::getAunts()
 {
 	return m_aunts;
@@ -98,6 +103,10 @@ vector<string> Family::getUncles()
 	return m_uncles;
 }
 
+vector<string> Family::getCousins()
+{
+	return m_cousins;
+}
 
 void Family::setId(string Id)
 {

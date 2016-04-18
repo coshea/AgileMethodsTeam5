@@ -76,7 +76,7 @@ public:
 	void buildIndividualMarriages(void);
 
 	//US20 aunts and uncles shouldn't marry nieces and nephews
-	void addAuntsAndUnclesToFamilies(void);
+	void addExtendedFamily(void);
 
 	enum IDType 
 	{
