@@ -571,7 +571,7 @@ void AuntsUnclesNiecesNephews(string fileName, Family &f)
 				fams = manager->lookupIndividual(auntUncle).getFAMS();
 				if (fams != "")
 				{
-					//spouse = manager->lookupFamily(spouse).getHusband();
+					spouse = manager->lookupFamily(fams).getHusband();
 				}
 				if (spouse == child)
 				{
@@ -597,7 +597,7 @@ void AuntsUnclesNiecesNephews(string fileName, Family &f)
 				fams = manager->lookupIndividual(auntUncle).getFAMS();
 				if (fams != "")
 				{
-					//spouse = manager->lookupFamily(spouse).getWife();
+					spouse = manager->lookupFamily(fams).getWife();
 				}
 				if (spouse == child)
 				{
